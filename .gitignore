@@ -1,0 +1,7 @@
+env/
+Info/
+data/
+diary.docx
+static/schemaspy
+*.pyc
+static/*.jar
