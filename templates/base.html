@@ -124,7 +124,11 @@
        <script src="static/js/formsInit.js"></script>
     <script src="static/plugins/dataTables/jquery.dataTables.js"></script>
     <script src="static/plugins/dataTables/dataTables.bootstrap.js"></script>
-     <script>
+     
+        <script>
+            $(function () { formInit(); });
+        </script> 
+        <script>
          $(document).ready(function () {
              $('#dataTables-states').dataTable(
                     {"order": [[ 4, "desc" ]]}
@@ -132,9 +136,6 @@
              
          });
     </script>
-        <script>
-            $(function () { formInit(); });
-        </script> 
 
      <!-- END PAGE LEVEL SCRIPTS -->
 </html>
