@@ -29,7 +29,7 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-states">
                                     <thead>
                                         <tr>
-                                            <th>State</th>
+                                            <th>County</th>
                                             <th>% M Status - Age</th>
                                             <th>Cost of Living(rank)</th>
                                             <th>Avg Salary</th>
@@ -38,15 +38,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {%for state in topstates %}
+                                        {%for item in result %}
 
                                             <tr class="odd gradeX">
-                                                <td>{{state['name']}}</td>
-                                                <td>{{'%0.2f' % state['totalmarital']|float}}</td>
-                                                <td>{{'%0.2f' % state['livingrank']|float}}</td>
-                                                <td>{{'%0.2f' % state['professionrank']|float}}</td>
-                                                <td>{{'%0.2f' % state['crimerank']|float}}</td>
-                                                <td>{{'%0.2f' % state['rankTotal']|float}}</td>
+                                                <td>{{item['name']}}</td>
+                                                <td>{{'%0.2f' % item['totalmarital']|float}}</td>
+                                                <td>{{item['livingrank']|int}}</td>
+                                                <td>{{'%0.2f' % item['professionrank']|float}}</td>
+                                                <td>{{'%0.2f' % item['crimerank']|float}}</td>
+                                                <td>{{'%0.0f' % item['rate']|float}}</td>
                                             </tr>
                                         {% endfor %}
                                         

@@ -16,7 +16,7 @@
                 </div>
 
                 <hr />
-                <form action='/search'>
+                <form action='/search_states'>
                 <div class="form-group">
 
                 <div class="row">
@@ -111,7 +111,7 @@
                         <label class="control-label col-lg-6">Professions:</label>
 
                         <div class="col-lg-10">
-                            <select class="form-control chzn-select" name="profession">
+                            <select data-placeholder="YOUR TEXT" class="form-control chzn-select" name="profession">
                                 {% for profession in professions %}
                                     <option value="{{ profession.title }}">{{ profession.title }}</option>
                                 {% endfor %}
@@ -151,10 +151,9 @@
             </form>
             </div>
 
-
         </div>
        <!--END PAGE CONTENT -->
-
+    
      <!--END MAIN WRAPPER -->
    
 {% endblock %}
