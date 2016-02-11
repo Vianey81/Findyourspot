@@ -320,7 +320,7 @@ def load_statesliving():
                 avg(countiesliving.wage_1ad) as wage_1ad,
                 avg(countiesliving.wage_2ad) as wage_2ad,
                 avg(countiesliving.wage_22) as wage_22,
-                avg(countiesliving.tax_1ad) as tax_2ad,
+                avg(countiesliving.tax_1ad) as tax_1ad,
                 avg(countiesliving.tax_2ad) as tax_2ad,
                 avg(countiesliving.tax_22) as tax_22
                 from counties join countiesliving
@@ -332,12 +332,12 @@ def load_statesliving():
 
     for row in result:
         state_id = row['state_id']
-        wage_1ad = row['wage_22']
-        wage_2ad = row['wage_22']
+        wage_1ad = row['wage_1ad']
+        wage_2ad = row['wage_2ad']
         wage_22 = row['wage_22']
-        tax_1ad = row['wage_22']
-        tax_2ad = row['wage_22']
-        tax_22 = row['wage_22']
+        tax_1ad = row['tax_1ad']
+        tax_2ad = row['tax_2ad']
+        tax_22 = row['tax_22']
 
         stateliving = StateLiving(state_id=state_id,
                                   wage_1ad=wage_1ad,

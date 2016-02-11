@@ -1,4 +1,4 @@
-"""Movie Ratings."""
+"""Find your Spot!"""
 
 from jinja2 import StrictUndefined
 
@@ -6,13 +6,16 @@ from flask import Flask, render_template, redirect, request, flash, session
 from flask_debugtoolbar import DebugToolbarExtension
 
 from sqlalchemy import func
-# from model import User, Rating, Movie, connect_to_db, db
-
+from model import connect_to_db, db
+from model import State, County, StatePopulation, CountyPopulation
+from model import StateProfession, StateLiving, CountyLiving, StateMarital
+from model import CountyMarital, StateCrime, CountyCrime
+import ranking
 
 app = Flask(__name__)
 
 # Required to use Flask sessions and the debug toolbar
-app.secret_key = "ABC"
+app.secret_key = "CRAYOLA"
 
 # Normally, if you use an undefined variable in Jinja2, it fails silently.
 # This is horrible. Fix this so that, instead, it raises an error.
@@ -23,19 +26,33 @@ app.jinja_env.undefined = StrictUndefined
 def index():
     """Homepage."""
 
-    return render_template("homepage.html")
+    professions = db.session.query(StateProfession.title).filter_by(level='major').group_by(StateProfession.title).all()
+
+    return render_template("homepage.html", professions=professions)
 
 
-@app.route('/verify_login', methods=["POST"])
-def verify_login():
-    """Login the user."""
-    pass
+@app.route('/search')
+def search():
+    """Search the top states"""
+
+    tax = request.args.get("tax")
+    profession = request.args.get("profession")
+    age = request.args.get("age")
+    marital = request.args.get("marital")
+    mstatus = marital + "_" + age
+    wl = int(request.args.get("opcLiving"))
+    wp = int(request.args.get("opcProfession"))
+    wc = int(request.args.get("opcCrime"))
+    wm = int(request.args.get("opcMarital"))
+    top_states = ranking.get_top_states(tax, profession, mstatus, wl, wp, wc, wm)
+
+    return render_template("rank.html", topstates=top_states)
 
 
-@app.route("/user_info/<int:user_id>")
-def user_info(user_id):
-    """Show the info of a user"""
-    pass
+@app.route("/map")
+def map():
+    """Show the info of a user"""  
+    return render_template("indexd3.html")
 
 
 @app.route("/movie_info/<int:movie_id>")
