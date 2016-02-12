@@ -1,141 +1,57 @@
-<!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
-
-<!-- BEGIN HEAD-->
+<html>
 <head>
-   
-     <meta charset="UTF-8" />
-    <title>Find your Spot!</title>
-     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <meta content="" name="description" />
-  <meta content="" name="author" />
-     <!--[if IE]>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <![endif]-->
-    <!-- GLOBAL STYLES -->
-    <!-- GLOBAL STYLES -->
-    <link rel="stylesheet" href="static/plugins/bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" href="static/css/main.css" />
-    <link rel="stylesheet" href="static/css/theme.css" />
-    <link rel="stylesheet" href="static/css/MoneAdmin.css" />
-    <link rel="stylesheet" href="static/plugins/Font-Awesome/css/font-awesome.css" />
-    <!--END GLOBAL STYLES -->
+    <link rel="stylesheet"
+          href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.css"/>
+<!--     // <script src="static/js/jquery-1.12.0.js"></script> -->
+    <script type="text/javascript" src="https://ajax.microsoft.com/ajax/jQuery/jquery-1.4.2.min.js"></script>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <!-- Jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<!-- Jquery UI-->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<script src="static/js/rangeSlider.js"></script>
+<!-- <script src="static/css/rangeSlider.css"></script> -->
+<link href="static/css/rangeSlider.css" rel="stylesheet" type="text/css" />
 
-    <!-- PAGE LEVEL STYLES -->
-     <link href="static/css/jquery-ui.css" rel="stylesheet" />
-      <link rel="stylesheet" href="static/plugins/uniform/themes/default/css/uniform.default.css" />
-      <link rel="stylesheet" href="static/plugins/tagsinput/jquery.tagsinput.css" />
-      <link rel="stylesheet" href="static/plugins/switch/static/stylesheets/bootstrap-switch.css" />
-    <!-- END PAGE LEVEL  STYLES -->
-       <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
+ <!-- This is where the title goes. -->    
+    {% block title %}
+      DEFAULT TITLE
+    {% endblock %}
+
 </head>
-    <!-- END  HEAD-->
-    <!-- BEGIN BODY-->
 
 <body>
-       <!-- MAIN WRAPPER -->
-    <div id="wrap">
+  <!-- Show Navigation Bar -->
+<div class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
 
-
-         <!-- HEADER SECTION -->
-        <div id="top">
-
-            <nav class="navbar navbar-inverse navbar-fixed-top " style="padding-top: 10px;">
-                <a data-original-title="Show/Hide Menu" data-placement="bottom" data-tooltip="tooltip" class="accordion-toggle btn btn-primary btn-sm visible-xs" data-toggle="collapse" href="#menu" id="menu-toggle">
-                    <i class="icon-align-justify"></i>
-                </a>
-                <!-- LOGO SECTION -->
-                <header class="navbar-header">
-
-                    <a href="index.html" class="navbar-brand">
-                    <img src="static/img/logo.png" alt="" /></a>
-                </header>
-                <!-- END LOGO SECTION -->
-                <ul class="nav navbar-top-links navbar-right">
-
-
-                    <!--ADMIN SETTINGS SECTIONS -->
-
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="icon-user "></i>&nbsp; <i class="icon-chevron-down "></i>
-                        </a>
-
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="icon-user"></i> User Profile </a>
-                            </li>
-                            <li><a href="#"><i class="icon-gear"></i> Settings </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="login.html"><i class="icon-signout"></i> Logout </a>
-                            </li>
-                        </ul>
-
-                    </li>
-                    <!--END ADMIN SETTINGS -->
-                </ul>
-
-            </nav>
-
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Find your Spot! . </a>
         </div>
-        <!-- END HEADER SECTION -->
 
-  <!-- Show flashed messages -->
-<!--   
-<div class="alert alert-success" role="alert">
-  {% with messages = get_flashed_messages() %}
-      {% for message in messages %}
-          {{ message }}
-      {% endfor %}
-  {% endwith %}
+        <div class="navbar-collapse collapse">
+            <div class="nav navbar-nav navbar-right">
+                    <a href="#">
+                        My Profile
+                    </a>
+            </div>
+        </div>
+
     </div>
-  <hr> -->
+</div>
 
-  {% block content %} put your content here {% endblock %}
+<div class="container">
+
+  <!-- This is where the main content goes. -->
+  {% block body %}
+      BODY OF PAGE GOES HERE VIA INHERITANCE
+  {% endblock %}
+
+</div>
 
 </body>
-<!-- FOOTER -->
-    <div id="footer">
-        <p>&copy;  binarytheme &nbsp;2014 &nbsp;</p>
-    </div>
-    <!--END FOOTER -->
-     <!-- GLOBAL SCRIPTS -->
-     <script src="static/plugins/jquery-2.0.3.min.js"></script>
-     <script src="static/js/jquery-ui.min.js"></script>
-     <script src="static/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="static/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    <!-- END GLOBAL SCRIPTS -->
-        <!-- PAGE LEVEL SCRIPTS -->
-
- <script src="static/plugins/uniform/jquery.uniform.min.js"></script>
-<script src="static/plugins/inputlimiter/jquery.inputlimiter.1.3.1.min.js"></script>
-<script src="static/plugins/chosen/chosen.jquery.min.js"></script>
-<script src="static/plugins/validVal/js/jquery.validVal.min.js"></script>
-<script src="static/plugins/switch/static/js/bootstrap-switch.min.js"></script>
-<script src="static/plugins/jquery.dualListbox-1.3/jquery.dualListBox-1.3.min.js"></script>
-<script src="static/plugins/autosize/jquery.autosize.min.js"></script>
-<script src="static/plugins/jasny/js/bootstrap-inputmask.js"></script>
-       <script src="static/js/formsInit.js"></script>
-    <script src="static/plugins/dataTables/jquery.dataTables.js"></script>
-    <script src="static/plugins/dataTables/dataTables.bootstrap.js"></script>
-     
-        <script>
-            $(function () { formInit(); });
-        </script> 
-        <script>
-         $(document).ready(function () {
-             $('#dataTables-states').dataTable(
-                    {"order": [[ 4, "desc" ]]}
-              );
-             
-         });
-    </script>
-
-     <!-- END PAGE LEVEL SCRIPTS -->
+<script src="static/js/ranking.js"></script>
 </html>

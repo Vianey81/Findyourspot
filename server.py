@@ -31,7 +31,7 @@ def index():
 
     professions = db.session.query(StateProfession.title).filter_by(level='major').group_by(StateProfession.title).all()
 
-    return render_template("homepage.html", professions=professions)
+    return render_template("index.html", professions=professions)
 
 
 @app.route('/search_states')
@@ -49,7 +49,7 @@ def search_states():
     wm = int(request.args.get("opcMarital"))
     top_states = ranking.get_top_states(tax, profession, mstatus, wl, wp, wc, wm)
 
-    return render_template("rank.html", result=top_states)
+    return jsonify(result=top_states)
 
 
 @app.route('/search_counties')
