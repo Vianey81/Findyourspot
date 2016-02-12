@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Main Page</title>
+{% endblock %}
+{% block body %}
+
+    <div class="site-wrapper">
+    <div class="site-wrapper-inner">
+
+        <h1>Let's Play!</h1>
+        <div id="searchform" class="container">
+            <!-- Form to contain the search  -->
+                <div class="row">
+                <div class="col-xs-12 col-md-3">
+                    <p>Marital Status & Age:</p>
+                </div>
+                <div class="col-xs-12 col-md-3">
+                    <input type="range" min="0" max="2" style="width:50%;">
+                    <output class="opcMarital" id="valor">0</output>
+                </div>
+
+                <div class="col-xs-12 col-md-3">
+                    <label class="control-label">Age:</label>
+                        <select data-placeholder="Choose your Age" class="form-control chzn-select" id="age">
+                                <option value="1524">15 - 24 yrs</option>
+                                <option value="2539">25 - 39 yrs</option>
+                                <option value="4059">40 - 59 yrs</option>
+                                <option value="60">60 - 90 yrs</option>
+                        </select>
+   
+                </div>
+                <div class="col-xs-12 col-md-3">
+                    <label class="control-label">Marital Status</label>
+                        <select class="form-control" id="marital">                            
+                                <option value="single">Single</option>
+                                <option value="married">Married</option>
+                                <option value="widowed">Widowed</option>
+                                <option value="divorced">Divorced</option>                          
+                        </select>
+                    </div>
+                </div>
+                <br> 
+                <div class="row">
+                    <div class="col-xs-12 col-md-3">
+                    <p>Cost Of Living:</p>
+                    </div>
+                    <div class="col-xs-12 col-md-3">
+                        <input type="range" min="0" max="2" style="width:50%;">
+                        <output class="opcLiving" id="valor">0</output>
+                    </div> 
+
+                    <label class="control-label col-md-2">Legal Situation:</label>
+
+                    <div class="col-md-4">
+                        <select class="form-control" id="tax">
+                            
+                                <option value="1ad">Living Alone</option>
+                                <option value="2ad">Living with a partner</option>
+                                <option value="22">Living with a partner with children</option>
+                            
+                        </select>
+                    </div>
+                    </div>
+                </div>
+                <br> 
+                <div class="row">
+                    <div class="col-xs-12 col-md-3">
+                    <p>Best Salary:</p>
+                    </div>
+                    <div class="col-xs-12 col-md-3">
+                        <input type="range" min="0" max="2" style="width:50%;">
+                        <output class="opcProfession" id="valor">0</output>
+                    </div> 
+
+                        <div class="col-md-6">
+                            <label class="control-label">Professions:</label>
+                            <select data-placeholder="YOUR TEXT" class="form-control chzn-select" id="profession">
+                                {% for profession in professions %}
+                                    <option value="{{ profession.title }}">{{ profession.title }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>   
+                <br>  
+                <div class="row">
+                    <div class="col-xs-12 col-md-3">
+                    <p>Crime:</p>
+                    </div>
+                    <div class="col-xs-12 col-md-3">
+                        <input type="range" min="0" max="2" style="width:50%;">
+                        <output class="opcCrime" id="valor">0</output>
+                    </div> 
+    
+                </div>
+                <div class="row">
+            <div class="col-xs-12 col-md-offset-6 col-md-6">
+                <button id="searchbtn" class="btn btn-primary">Search</button>
+            </div>
+            </div>
+            </div>
+
+
+        <div id = "map form" class="container">
+
+        </div>
+                
+        <div id="infoform" class="container">
+             <hr />
+             <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            These are your perfect spots!
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-states">
+                                    <thead>
+                                        <tr>
+                                            <th>County</th>
+                                            <th>% M Status - Age</th>
+                                            <th>Cost of Living(rank)</th>
+                                            <th>Avg Salary</th>
+                                            <th>Crime(rank)</th>
+                                            <th>Total Score</th>                                           
+                                        </tr>
+                                    </thead>
+                                    <tbody id="ranktable">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            
+              </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function valueOutput(element) {
+        var value = element.value,
+            output = element.parentNode.getElementsByTagName('output')[0];
+        output.innerHTML = value * 4;
+    }
+    Array.prototype.slice.call(document.querySelectorAll('input[type="range"]')).forEach(function(el){
+        el.addEventListener('input', function(e){
+            valueOutput(e.target);
+        }, false);
+    });
+</script>
+
+
+{% endblock %}
