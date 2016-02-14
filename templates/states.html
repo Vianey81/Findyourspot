@@ -48,7 +48,7 @@
             .on("zoom", zoom));
 
     d3.json("/data/us.json", function (error, us) {
-        d3.tsv("/data/rankresults.tsv", function (error, matches) {
+        d3.tsv("data/rankresults.tsv", function (error, matches) {
             var rateById = {};
 
             matches.forEach(function (d) { // <-B

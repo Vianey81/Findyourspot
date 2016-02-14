@@ -4,6 +4,7 @@ from sqlalchemy import func
 from model import State, County, StatePopulation, CountyPopulation
 from model import StateProfession, StateLiving, CountyLiving, StateMarital
 from model import CountyMarital, StateCrime, CountyCrime
+from flask import session
 
 from pandas import DataFrame
 
@@ -38,7 +39,7 @@ def get_top_counties(tax, profession, marital, wl, wp, wc, wm):
     df['rankTotal'] = df['Total'].rank(ascending=True)
 
     rank_counties = df.sort_index(by=['rankTotal'], ascending=False).fillna(0).to_dict('records')
-    create_tsv(df.fillna(0), ["county_id", "rankTotal"])
+    store_in_session(df.fillna(0), ["county_id", "rankTotal"])
     print "Living:", wl, " Prof: ", wp, " Crime: ", wc, " Marital: ", wm
     return rank_counties
 
@@ -69,15 +70,17 @@ def get_top_states(tax, profession, marital, wl, wp, wc, wm):
     df['rate'] = df['Total'].rank(ascending=True)
 
     rank_states = df.sort_index(by=['rate'], ascending=False).fillna(0).to_dict('records')
-    create_tsv(df.fillna(0), ["id", "rate"])
+    store_in_session(df.fillna(0), ["id", "rate", "name"])
     print "Living:", wl, " Prof: ", wp, " Crime: ", wc, " Marital: ", wm
     return rank_states
 
 
-def create_tsv(df, header):
+def store_in_session(df, header):
     """ Create file tsv to with the results"""
-
-    df.to_csv('data/rankresults.tsv', mode='a', sep='\t', index=False,  columns=header)
+    session['lastsearch'] = []
+    session['lastsearch'] = df.to_dict('records')
+    print session['lastsearch']
+    df.to_csv('data/rankresults.csv', sep='\t', index=False,  columns=header)
     return None
 
 

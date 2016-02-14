@@ -2,7 +2,7 @@
 
 from jinja2 import StrictUndefined
 
-from flask import Flask, render_template, redirect, request, flash, session, send_from_directory
+from flask import Flask, render_template, redirect, request, flash, session, send_from_directory, Response
 from flask_debugtoolbar import DebugToolbarExtension
 
 from sqlalchemy import func
@@ -82,6 +82,13 @@ def send_js(path):
 
     return send_from_directory('data', path)
 
+@app.route('/get_session')
+def get_session():
+    """Send the session"""
+    lastsearch = json.dumps(session['lastsearch'])
+    print "session_info: ", lastsearch
+
+    return Response(lastsearch, status=200, mimetype='application/json')
 
 @app.route('/map_states')
 def map_states():

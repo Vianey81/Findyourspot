@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-xs-12 col-md-3">
                     <input type="range" min="0" max="2" style="width:50%;">
-                    <output class="opcMarital" id="valor">0</output>
+                    <output class="opcMarital" id="valor">4</output>
                 </div>
 
                 <div class="col-xs-12 col-md-3">
@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-xs-12 col-md-3">
                         <input type="range" min="0" max="2" style="width:50%;">
-                        <output class="opcLiving" id="valor">0</output>
+                        <output class="opcLiving" id="valor">4</output>
                     </div> 
 
                     <label class="control-label col-md-2">Legal Situation:</label>
@@ -69,7 +69,7 @@
                     </div>
                     <div class="col-xs-12 col-md-3">
                         <input type="range" min="0" max="2" style="width:50%;">
-                        <output class="opcProfession" id="valor">0</output>
+                        <output class="opcProfession" id="valor">4</output>
                     </div> 
 
                         <div class="col-md-6">
@@ -89,7 +89,7 @@
                     </div>
                     <div class="col-xs-12 col-md-3">
                         <input type="range" min="0" max="2" style="width:50%;">
-                        <output class="opcCrime" id="valor">0</output>
+                        <output class="opcCrime" id="valor">4</output>
                     </div> 
     
                 </div>
@@ -101,8 +101,14 @@
             </div>
 
 
-        <div id = "map form" class="container">
-
+        <div id = "mapform" class="container">
+            
+        </div>
+        <div id = "mustacheform" class="container">
+<!-- Mustache template, rendered later to show the details of a feature -->
+             <script id="template" type="x-tmpl-mustache">
+              
+             </script>
         </div>
                 
         <div id="infoform" class="container">
@@ -151,7 +157,24 @@
     Array.prototype.slice.call(document.querySelectorAll('input[type="range"]')).forEach(function(el){
         el.addEventListener('input', function(e){
             valueOutput(e.target);
+            queue()   // queue function loads all external data files asynchronously 
+            .defer(showDataRank)  // our geometries
+            .defer(loadNewData);
         }, false);
+    });
+    $('#searchbtn').on('click', function(){
+        queue()   // queue function loads all external data files asynchronously 
+            .defer(showDataRank)  // our geometries
+            .defer(loadNewData);
+        // showDataRank();
+        // loadNewData();
+    });
+    $('.opcCrime').change(function(){
+        queue()   // queue function loads all external data files asynchronously 
+            .defer(showDataRank)  // our geometries
+            .defer(loadNewData);
+        // showDataRank();
+        // loadNewData();
     });
 </script>
 
