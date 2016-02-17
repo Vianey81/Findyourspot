@@ -82,13 +82,15 @@ def send_js(path):
 
     return send_from_directory('data', path)
 
-@app.route('/get_session')
-def get_session():
-    """Send the session"""
-    lastsearch = json.dumps(session['lastsearch'])
-    print "session_info: ", lastsearch
 
-    return Response(lastsearch, status=200, mimetype='application/json')
+@app.route('/crime_to_html')
+def crime_to_html():
+    """ Generate the chart for Crime by State."""
+
+    state_id = request.args.get("id")
+
+    return ranking.get_chart_crime(state_id)
+
 
 @app.route('/map_states')
 def map_states():

@@ -18,71 +18,29 @@
     <!-- <script src="static/css/rangeSlider.css"></script> -->
     <link href="static/css/rangeSlider.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="static/css/styles.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/ranking.css"/>
     <script type="text/javascript" src="static/js/d3.js"></script>
     <script type="text/javascript" src="static/js/topojson.js"></script>
 
     <script src="http://d3js.org/queue.v1.min.js"></script>
+    <script src="static/js/ranking.js"></script>
+
+    <script type="text/css" src="https://cdn.datatables.net/1.10.11/css/dataTables.bootstrap.min.css"></script>
+    <script type="text/javascript" src="static/js/jquery-1.12.0.js"></script>
+    <script type="text/javascript" src="static/js/jquery-1.12.0.js"></script>
+    <link href="static/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
+    <script src="static/js/async.js"></script>
+    
+
  <!-- This is where the title goes. -->    
     {% block title %}
       DEFAULT TITLE
     {% endblock %}
-    <style>
-        path {
-            fill: #ccc;
-            
-        }
-        .states {
-            fill: none;
-            stroke: #fff;
-            stroke-linejoin: round;
-        }
-        .counties {
-            fill: none;
-            stroke: #fff;
-            stroke-linejoin: round;
-        }
 
-      #wrapper {
-          width: 960px;
-          margin: -30px auto 0;
-      }
-      #map {
-          width: 960px;
-          height: 580px;
-          position: relative;
-      }
-      .stroke {
-        fill: none;
-        stroke: #888;
-        stroke-width: 2px;
-      }
-      
-      .fill {
-        fill: #fff;
-      }
-      
-      .graticule {
-        fill: none;
-        stroke: #777;
-        stroke-width: .5px;
-        stroke-opacity: .5;
-      }
-      
-      .land {
-        fill: #222;
-      }
-      
-      .boundary {
-        fill: none;
-        stroke: #fff;
-        stroke-width: .5px;
-      }
-      .states {
-          fill: steelblue;
-          stroke: white;
-      }
-
-    </style>
 
 </head>
 
@@ -116,7 +74,7 @@
 </div>
 
 </body>
-<script src="static/js/ranking.js"></script>
+
 
 <!-- <script type="text/javascript" src="static/js/rankingmap.js"></script> -->
 

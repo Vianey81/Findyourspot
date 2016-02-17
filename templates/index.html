@@ -8,132 +8,167 @@
     <div class="site-wrapper-inner">
 
         <h1>Let's Play!</h1>
-        <div id="searchform" class="container">
-            <!-- Form to contain the search  -->
-                <div class="row">
-                <div class="col-xs-12 col-md-3">
-                    <p>Marital Status & Age:</p>
-                </div>
-                <div class="col-xs-12 col-md-3">
-                    <input type="range" min="0" max="2" style="width:50%;">
-                    <output class="opcMarital" id="valor">4</output>
-                </div>
+        <div id="searchform" class="contaniner">
+              <div class="row">
+                
+                <div class="panel panel-primary col-xs-12 col-md-3" style="height: 220px;">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Marital Status & Age</h3>
+                  </div>
+                  <div class="panel-body" >
+                    <div class="col-xs-12 col-md-12">
+                                <input type="range" min="0" max="2" style="width:100%;">
+                                <output class="opcMarital" id="valor">4</output>
+                            </div>
 
-                <div class="col-xs-12 col-md-3">
-                    <label class="control-label">Age:</label>
-                        <select data-placeholder="Choose your Age" class="form-control chzn-select" id="age">
-                                <option value="1524">15 - 24 yrs</option>
-                                <option value="2539">25 - 39 yrs</option>
-                                <option value="4059">40 - 59 yrs</option>
-                                <option value="60">60 - 90 yrs</option>
-                        </select>
-   
+                            <div class="col-xs-12 col-md-12">
+                                <label class="control-label">Age:</label>
+                                    <select data-placeholder="Choose your Age" class="form-control chzn-select" id="age">
+                                            <option value="1524">15 - 24 yrs</option>
+                                            <option value="2539">25 - 39 yrs</option>
+                                            <option value="4059">40 - 59 yrs</option>
+                                            <option value="60">60 - 90 yrs</option>
+                                    </select>
+               
+                            </div>
+                            <div class="col-xs-12 col-md-12">
+                                <label class="control-label">Marital Status</label>
+                                    <select class="form-control" id="marital">                            
+                                            <option value="single">Single</option>
+                                            <option value="married">Married</option>
+                                            <option value="widowed">Widowed</option>
+                                            <option value="divorced">Divorced</option>                          
+                                    </select>
+                                </div>
+                  </div>
                 </div>
-                <div class="col-xs-12 col-md-3">
-                    <label class="control-label">Marital Status</label>
-                        <select class="form-control" id="marital">                            
-                                <option value="single">Single</option>
-                                <option value="married">Married</option>
-                                <option value="widowed">Widowed</option>
-                                <option value="divorced">Divorced</option>                          
-                        </select>
-                    </div>
-                </div>
-                <br> 
-                <div class="row">
-                    <div class="col-xs-12 col-md-3">
-                    <p>Cost Of Living:</p>
-                    </div>
-                    <div class="col-xs-12 col-md-3">
-                        <input type="range" min="0" max="2" style="width:50%;">
-                        <output class="opcLiving" id="valor">4</output>
-                    </div> 
+                
+                                
 
-                    <label class="control-label col-md-2">Legal Situation:</label>
+                <div class="panel panel-success col-xs-12 col-md-3" style="height: 220px;">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Cost of Living</h3>
+                  </div>
+                  <div class="panel-body">
+                    <div class="col-xs-12 col-md-12">
+                                    <input type="range" min="0" max="2" style="width:100%;">
+                                    <output class="opcLiving" id="valor" ></output>
+                                </div> 
 
-                    <div class="col-md-4">
-                        <select class="form-control" id="tax">
-                            
-                                <option value="1ad">Living Alone</option>
-                                <option value="2ad">Living with a partner</option>
-                                <option value="22">Living with a partner with children</option>
-                            
-                        </select>
-                    </div>
-                    </div>
-                </div>
-                <br> 
-                <div class="row">
-                    <div class="col-xs-12 col-md-3">
-                    <p>Best Salary:</p>
-                    </div>
-                    <div class="col-xs-12 col-md-3">
-                        <input type="range" min="0" max="2" style="width:50%;">
-                        <output class="opcProfession" id="valor">4</output>
-                    </div> 
+                                <label class="control-label col-md-12">Legal Situation:</label>
 
-                        <div class="col-md-6">
-                            <label class="control-label">Professions:</label>
-                            <select data-placeholder="YOUR TEXT" class="form-control chzn-select" id="profession">
-                                {% for profession in professions %}
-                                    <option value="{{ profession.title }}">{{ profession.title }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
-                </div>   
-                <br>  
-                <div class="row">
-                    <div class="col-xs-12 col-md-3">
-                    <p>Crime:</p>
-                    </div>
-                    <div class="col-xs-12 col-md-3">
-                        <input type="range" min="0" max="2" style="width:50%;">
-                        <output class="opcCrime" id="valor">4</output>
-                    </div> 
-    
+                                <div class="col-md-12">
+                                    <select class="form-control" id="tax">
+                                        
+                                            <option value="1ad">Living Alone</option>
+                                            <option value="2ad">Living with a partner</option>
+                                            <option value="22">Living with a partner with children</option>
+                                        
+                                    </select>
+                                </div>
+                  </div>
                 </div>
-                <div class="row">
-            <div class="col-xs-12 col-md-offset-6 col-md-6">
-                <button id="searchbtn" class="btn btn-primary">Search</button>
-            </div>
-            </div>
-            </div>
+                
+                <div class="panel panel-info col-xs-12 col-md-3" style="height: 220px;">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Best Salary</h3>
+                  </div>
+                  <div class="panel-body">
+                    <div class="col-xs-12 col-md-12">
+                                    <input type="range" min="0" max="2" style="width:100%;">
+                                    <output class="opcProfession" >4</output>
+                                </div> 
+
+                                    <div class="col-md-12">
+                                        <label class="control-label">Professions:</label>
+                                        <select data-placeholder="YOUR TEXT" class="form-control chzn-select" id="profession">
+                                            {% for profession in professions %}
+                                                <option value="{{ profession.title }}">{{ profession.title }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                  </div>
+                </div>
+                
+                <div class="panel panel-warning col-xs-12 col-md-3" style="height: 220px;">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Crime</h3>
+                  </div>
+                  <div class="panel-body">
+                    <div class="col-xs-12 col-md-12">
+                                    <input type="range" min="0" max="2" style="width:100%;">
+                                    <output class="opcCrime" id="valor">4</output>
+                                </div>
+                  </div>
+                </div>
+              
+              </div>
+        </div>
 
 
         <div id = "mapform" class="container">
             
         </div>
-        <div id = "mustacheform" class="container">
-<!-- Mustache template, rendered later to show the details of a feature -->
-             <script id="template" type="x-tmpl-mustache">
-              
-             </script>
+         <div id="details" class="hidden">
+            {% raw %}
+                <script id="template" type="text/html">
+                  <h3>{{ name }}</h3>
+                  <table>
+                    <tr>
+                      <th>Marital & Age:</th>
+                      <td>{{ totalmarital }} </td>
+                    </tr>
+                    <tr>
+                      <th>Cost of Living:</th>
+                      <td>{{ livingrank }} %</td>
+                    </tr>
+                    <tr>
+                      <th>Profession:</th>
+                      <td>{{ professionrank }} %</td>
+                    </tr>
+                    <tr>
+                      <th>Crime Rank:</th>
+                      <td>{{ crimerank }} %</td>
+                    </tr>
+                    <tr>
+                      <th>Total Rank:</th>
+                      <td>{{ rate }} %</td>
+                    </tr>
+                  </table>
+                </script>
+        {% endraw %}
+</div>
+
+        <div id="charts" class="container">
+          <div class="row">
+              <div id="crime">
+              </div>
+          </div>
         </div>
+    
                 
-        <div id="infoform" class="container">
-             <hr />
-             <div class="row">
+        <div id="infoform" class="container" >
+            <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            These are your perfect spots!
+                            DataTables Advanced Tables
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-states">
+                                <table class="table table-striped table-bordered table-hover" id="datastates">
                                     <thead>
                                         <tr>
-                                            <th>County</th>
-                                            <th>% M Status - Age</th>
-                                            <th>Cost of Living(rank)</th>
-                                            <th>Avg Salary</th>
-                                            <th>Crime(rank)</th>
-                                            <th>Total Score</th>                                           
+                                            <th>State</th>
+                                            <th>Marital&Age</th>
+                                            <th>Cost of Living</th>
+                                            <th>Profession</th>
+                                            <th>Crime</th>
+                                            <th>Total rate</th>
                                         </tr>
                                     </thead>
                                     <tbody id="ranktable">
-
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -141,9 +176,10 @@
                         </div>
                     </div>
                 </div>
-            
-              </div>
+        
         </div>
+
+        
     </div>
 </div>
 
@@ -153,30 +189,43 @@
         var value = element.value,
             output = element.parentNode.getElementsByTagName('output')[0];
         output.innerHTML = value * 4;
+        
     }
-    Array.prototype.slice.call(document.querySelectorAll('input[type="range"]')).forEach(function(el){
-        el.addEventListener('input', function(e){
-            valueOutput(e.target);
-            queue()   // queue function loads all external data files asynchronously 
-            .defer(showDataRank)  // our geometries
-            .defer(loadNewData);
+
+    Array.prototype.slice.call(document.querySelectorAll('input[type="range"]')).forEach(function (el) {
+            el.addEventListener('input', function (e) {
+                valueOutput(e.target);
+                loadNewData();
+              
+            }, false);
+        });
+
+    Array.prototype.slice.call(document.querySelectorAll('select')).forEach(function(el){
+        el.addEventListener('input', function (e){
+              loadNewData();
         }, false);
     });
-    $('#searchbtn').on('click', function(){
-        queue()   // queue function loads all external data files asynchronously 
-            .defer(showDataRank)  // our geometries
-            .defer(loadNewData);
-        // showDataRank();
-        // loadNewData();
-    });
-    $('.opcCrime').change(function(){
-        queue()   // queue function loads all external data files asynchronously 
-            .defer(showDataRank)  // our geometries
-            .defer(loadNewData);
-        // showDataRank();
-        // loadNewData();
-    });
+
+
+    $(document).ready(function() {
+    $('#datastates').DataTable;
+} );
+
+
 </script>
+
+     <script src="static/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="static/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <!-- END GLOBAL SCRIPTS -->
+        <!-- PAGE LEVEL SCRIPTS -->
+    <script src="static/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="static/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
+     <script>
+         $(document).ready(function () {
+             $('#datastates').dataTable();
+         });
+    </script>
 
 
 {% endblock %}
