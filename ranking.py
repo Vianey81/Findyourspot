@@ -86,18 +86,5 @@ def store_in_session(df, header):
     return None
 
 
-def get_chart_crime(id):
-
-    state = State.query.get(id)
-    chart = pieChart(name='Crime by State', color='category20c', height=200, width=200)
-    xdata = ["Violent", "Murder", "Rape", "Assault", "Robery", "Property Robery", "Motor Robery"]
-    ydata = [state.crime.violent_rate, state.crime.murder_rate, state.crime.rape_rate, state.crime.assault_rate,
-            state.crime.robery_rate, state.crime.property_rate, state.crime.motor_rate,]
-    extra_serie = {"tooltip" : {"y_start":"", "y_end":" "}}
-    chart.add_serie(y=ydata, x=xdata, extra=extra_serie)
-    result = chart.buildhtml()
-    return result
-
-
 if __name__ == "__main__":
     connect_to_db(app)

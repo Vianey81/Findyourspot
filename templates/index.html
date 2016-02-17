@@ -139,12 +139,36 @@
         {% endraw %}
 </div>
 
-        <div id="charts" class="container">
+        <!-- <div id="charts" class="container">
           <div class="row">
-              <div id="crime">
-              </div>
+              <body ng-app='nvd3TestApp'>
+                <h1>Hello Plunker!</h1>
+                <div ng-controller="ExampleCtrl">
+                  <nvd3-line-chart
+                    data="exampleData"
+                    showXAxis="true"
+                    showYAxis="true"
+                    tooltips="true"
+                    interactive="true">
+                  </nvd3-line-chart>
+                
+                
+
+                  <nvd3-pie-chart data="exampleData2"
+                    id="exampleId"
+                    width="550"
+                    height="350"
+                    x="xFunction()"
+                    y="yFunction()"
+                    showLabels="true"
+                    showLegend="true">
+                    <svg></svg>
+                  </nvd3-pie-chart>
+                </div>
+
+              </body>
           </div>
-        </div>
+        </div> -->
     
                 
         <div id="infoform" class="container" >
@@ -155,8 +179,8 @@
                             DataTables Advanced Tables
                         </div>
                         <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="datastates">
+                            <div >
+                                <table class="display" cellspacing="0" width="100%" id="datastates">
                                     <thead>
                                         <tr>
                                             <th>State</th>
@@ -208,7 +232,7 @@
 
 
     $(document).ready(function() {
-    $('#datastates').DataTable;
+    $('#datastates').DataTable();
 } );
 
 
@@ -223,7 +247,7 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
      <script>
          $(document).ready(function () {
-             $('#datastates').dataTable();
+             $('#datastates').DataTable();
          });
     </script>
 

@@ -88,8 +88,16 @@ def crime_to_html():
     """ Generate the chart for Crime by State."""
 
     state_id = request.args.get("id")
-
-    return ranking.get_chart_crime(state_id)
+    state = State.query.get(state_id)
+    result = []
+    result = [{"key": "Violent", "y": state.crime[0].violent_rate},
+              {"key": "Murder", "y": state.crime[0].murder_rate},
+              {"key": "Rape", "y": state.crime[0].rape_rate},
+              {"key": "Assault", "y": state.crime[0].assault_rate},
+              {"key": "Robery", "y": state.crime[0].robery_rate},
+              {"key": "Property", "y": state.crime[0].property_rate},
+              {"key": "Motor", "y": state.crime[0].motor_rate}]
+    return jsonify(result=result)
 
 
 @app.route('/map_states')
