@@ -8,6 +8,7 @@
     <div class="site-wrapper-inner">
 
         <h1>Let's Play!</h1>
+        <!-- Container of the search -->
         <div id="searchform" class="contaniner">
               <div class="row">
                 
@@ -105,7 +106,7 @@
               </div>
         </div>
 
-
+        <!-- Container of the map -->
         <div id = "mapform" class="container">
             
         </div>
@@ -116,71 +117,55 @@
                   <table>
                     <tr>
                       <th>Marital & Age:</th>
-                      <td>{{ totalmarital }} </td>
+
+                      <td>{{totalmarital}} %</td>
                     </tr>
                     <tr>
                       <th>Cost of Living:</th>
-                      <td>{{ livingrank }} %</td>
+                      <td>{{ livingrank }} </td>
                     </tr>
                     <tr>
                       <th>Profession:</th>
-                      <td>{{ professionrank }} %</td>
+                      <td>{{ professionrank }} </td>
                     </tr>
                     <tr>
                       <th>Crime Rank:</th>
-                      <td>{{ crimerank }} %</td>
+                      <td>{{ crimerank }} </td>
                     </tr>
                     <tr>
                       <th>Total Rank:</th>
-                      <td>{{ rate }} %</td>
+                      <td>{{ rate }} </td>
                     </tr>
                   </table>
                 </script>
-        {% endraw %}
+        
 </div>
 
-        <!-- <div id="charts" class="container">
-          <div class="row">
-              <body ng-app='nvd3TestApp'>
-                <h1>Hello Plunker!</h1>
-                <div ng-controller="ExampleCtrl">
-                  <nvd3-line-chart
-                    data="exampleData"
-                    showXAxis="true"
-                    showYAxis="true"
-                    tooltips="true"
-                    interactive="true">
-                  </nvd3-line-chart>
-                
-                
+        <div id="charts" >
+          <div class="row" >
+            <div class="col-lg-4">
 
-                  <nvd3-pie-chart data="exampleData2"
-                    id="exampleId"
-                    width="550"
-                    height="350"
-                    x="xFunction()"
-                    y="yFunction()"
-                    showLabels="true"
-                    showLegend="true">
-                    <svg></svg>
-                  </nvd3-pie-chart>
-                </div>
 
-              </body>
+            <button id="crimebtn" ng-click="onclick1()" hidden=true></button>
+            <nvd3 options="options" data="data1"></nvd3>
+
+
+        {% endraw %}
+            </div>
           </div>
-        </div> -->
+        </div>
     
-                
+        <!-- Container of the Data Table -->
         <div id="infoform" class="container" >
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            DataTables Advanced Tables
+                            <p id="ptable">All the counties</p>
                         </div>
                         <div class="panel-body">
                             <div >
-                                <table id="example" class="display" cellspacing="0" width="100%">
+                                <table id="infotable" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
                                             <th>Name</th>
@@ -206,7 +191,7 @@
 </div>
 
 <script>
-
+    // function to change the value of the Slider
     function valueOutput(element) {
         var value = element.value,
             output = element.parentNode.getElementsByTagName('output')[0];
@@ -214,22 +199,25 @@
         
     }
 
+    // function to add the Event to all sliders (on change call the loadNewData())
     Array.prototype.slice.call(document.querySelectorAll('input[type="range"]')).forEach(function (el) {
             el.addEventListener('input', function (e) {
                 valueOutput(e.target);
-                loadNewData();
-              
+                loadNewData();  
             }, false);
         });
 
+    // function to add the Event to all selects (on change call the loadNewData())
     Array.prototype.slice.call(document.querySelectorAll('select')).forEach(function(el){
         el.addEventListener('input', function (e){
               loadNewData();
+              
         }, false);
     });
 
-
+    // Set the url ajax to the Data Table
     $(document).ready(function() {
+
       var tax = $('#tax').val();
       var profession = $('#profession').val();
       var age = $('#age').val();
@@ -238,11 +226,11 @@
       var wp = $('.opcProfession').val();
       var wc = $('.opcCrime').val();
       var wm = $('.opcMarital').val();
-      var url = "/search_states?tax="+tax+"&profession="+profession+"&age="+age+"&marital="+marital+"&opcLiving="+wl+"&opcMarital="+wm+"&opcCrime="+wc+"&opcProfession="+wp;
+      var urlbystate = "/search_counties?state_id="+state_id+"&tax="+tax+"&profession="+profession+"&age="+age+"&marital="+marital+"&opcLiving="+wl+"&opcMarital="+wm+"&opcCrime="+wc+"&opcProfession="+wp;
 
-      var table = $('#example').dataTable( {
+      var table = $('#infotable').dataTable( {
               "ajax": {
-                "url": url,
+                "url": urlbystate,
                 "type": "GET",
               },
               "columns": [
@@ -252,7 +240,8 @@
                 { "data": "totalmarital" },
                 { "data": "crimerank" },
                 { "data": "rate" }
-                ]
+                ],
+                "order": [[ 5, "desc" ]]
             } );
 
          

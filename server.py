@@ -36,7 +36,7 @@ def index():
 
 @app.route('/search_states')
 def search_states():
-    """Search the top states"""
+    """Search the top states with the info in the search form."""
 
     tax = request.args.get("tax")
     profession = request.args.get("profession")
@@ -64,8 +64,13 @@ def search_counties():
     wp = int(request.args.get("opcProfession"))
     wc = int(request.args.get("opcCrime"))
     wm = int(request.args.get("opcMarital"))
-    top_counties = ranking.get_top_counties(tax, profession, mstatus, wl, wp, wc, wm)
-    return render_template("rank.html", result=top_counties)
+
+    if (request.args.get("state_id")):
+        state_id = request.args.get("state_id")
+        top_counties = ranking.counties_by_id(state_id, tax, profession, mstatus, wl, wp, wc, wm)
+    else:
+        top_counties = ranking.get_top_counties(tax, profession, mstatus, wl, wp, wc, wm)
+    return jsonify(data=top_counties)
 
 
 @app.route('/map_counties')
