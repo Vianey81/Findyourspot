@@ -72,8 +72,7 @@ def get_top_states(tax, profession, marital, wl, wp, wc, wm):
     df['rate'] = df['Total'].rank(ascending=True)
 
     rank_states = df.sort_index(by=['rate'], ascending=False).fillna(0).to_dict('records')
-    store_in_session(df.fillna(0), ["id", "rate", "name"])
-    print "Living:", wl, " Prof: ", wp, " Crime: ", wc, " Marital: ", wm
+
     return rank_states
 
 

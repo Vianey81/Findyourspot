@@ -52,7 +52,7 @@
                   <div class="panel-body">
                     <div class="col-xs-12 col-md-12">
                                     <input type="range" min="0" max="2" style="width:100%;">
-                                    <output class="opcLiving" id="valor" ></output>
+                                    <output class="opcLiving" id="valor" >4</output>
                                 </div> 
 
                                 <label class="control-label col-md-12">Legal Situation:</label>
@@ -180,20 +180,18 @@
                         </div>
                         <div class="panel-body">
                             <div >
-                                <table class="display" cellspacing="0" width="100%" id="datastates">
+                                <table id="example" class="display" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
-                                            <th>State</th>
-                                            <th>Marital&Age</th>
+                                            <th>Name</th>
                                             <th>Cost of Living</th>
-                                            <th>Profession</th>
+                                            <th>Avg. Prof. Salary</th>
+                                            <th>Marital & Age</th>
                                             <th>Crime</th>
-                                            <th>Total rate</th>
+                                            <th>Total</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="ranktable">
-                                        
-                                    </tbody>
+                                    
                                 </table>
                             </div>
                            
@@ -232,24 +230,37 @@
 
 
     $(document).ready(function() {
-    $('#datastates').DataTable();
-} );
+      var tax = $('#tax').val();
+      var profession = $('#profession').val();
+      var age = $('#age').val();
+      var marital = $('#marital').val();
+      var wl = $('.opcLiving').val();
+      var wp = $('.opcProfession').val();
+      var wc = $('.opcCrime').val();
+      var wm = $('.opcMarital').val();
+      var url = "/search_states?tax="+tax+"&profession="+profession+"&age="+age+"&marital="+marital+"&opcLiving="+wl+"&opcMarital="+wm+"&opcCrime="+wc+"&opcProfession="+wp;
+
+      var table = $('#example').dataTable( {
+              "ajax": {
+                "url": url,
+                "type": "GET",
+              },
+              "columns": [
+                { "data": "name" },
+                { "data": "livingrank" },
+                { "data": "professionrank" },
+                { "data": "totalmarital" },
+                { "data": "crimerank" },
+                { "data": "rate" }
+                ]
+            } );
+
+         
+    } );
 
 
 </script>
 
-     <script src="static/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="static/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    <!-- END GLOBAL SCRIPTS -->
-        <!-- PAGE LEVEL SCRIPTS -->
-    <script src="static/plugins/dataTables/jquery.dataTables.js"></script>
-    <script src="static/plugins/dataTables/dataTables.bootstrap.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
-     <script>
-         $(document).ready(function () {
-             $('#datastates').DataTable();
-         });
-    </script>
 
 
 {% endblock %}

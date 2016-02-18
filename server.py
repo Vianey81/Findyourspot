@@ -48,8 +48,7 @@ def search_states():
     wc = int(request.args.get("opcCrime"))
     wm = int(request.args.get("opcMarital"))
     top_states = ranking.get_top_states(tax, profession, mstatus, wl, wp, wc, wm)
-
-    return jsonify(result=top_states)
+    return jsonify(data=top_states)
 
 
 @app.route('/search_counties')
