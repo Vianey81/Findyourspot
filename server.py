@@ -87,8 +87,8 @@ def send_js(path):
     return send_from_directory('data', path)
 
 
-@app.route('/crime_to_html')
-def crime_to_html():
+@app.route('/crime.json')
+def crime_json():
     """ Generate the chart for Crime by State."""
 
     state_id = request.args.get("id")
@@ -101,6 +101,64 @@ def crime_to_html():
               {"key": "Robery", "y": state.crime[0].robery_rate},
               {"key": "Property", "y": state.crime[0].property_rate},
               {"key": "Motor", "y": state.crime[0].motor_rate}]
+    return jsonify(result=result)
+
+
+@app.route('/marital.json')
+def marital_json():
+    """ Generate the chart for Marital by State."""
+
+    state_id = request.args.get("id")
+
+    query = """select m.state_id as id,
+               (m.male_single_1524+m.male_single_2539+m.male_single_4059+m.male_single_60+
+                m.female_single_1524+m.female_single_2539+m.female_single_4059+m.female_single_60) as totalsingle,
+                (m.male_married_1524+m.male_married_2539+m.male_married_4059+m.male_married_60+
+                m.female_married_1524+m.female_married_2539+m.female_married_4059+m.female_married_60) as totalmarried,
+                (m.male_widowed_1524+m.male_widowed_2539+m.male_widowed_4059+m.male_widowed_60+
+                m.female_widowed_1524+m.female_widowed_2539+m.female_widowed_4059+m.female_widowed_60) as totalwidowed,
+                (m.male_divorced_1524+m.male_divorced_2539+m.male_divorced_4059+m.male_divorced_60+
+                m.female_divorced_1524+m.female_divorced_2539+m.female_divorced_4059+m.female_divorced_60) as totaldivorced
+               from statesmarital m
+               where m.state_id = """+state_id+"""
+               order by m.state_id"""
+
+    maritalresult = db.session.execute(query).first()
+
+    result = []
+    result = [{"key": "Single", "y": maritalresult.totalsingle},
+              {"key": "Married", "y": maritalresult.totalmarried},
+              {"key": "Widowed", "y": maritalresult.totalwidowed},
+              {"key": "Divorced", "y": maritalresult.totaldivorced}]
+    return jsonify(result=result)
+
+
+@app.route('/age.json')
+def age_json():
+    """ Generate the chart for Age by State."""
+
+    state_id = request.args.get("id")
+
+    query = """select m.state_id as id,
+               (m.male_single_1524+m.male_married_1524+m.male_widowed_1524+m.male_divorced_1524+
+                m.female_single_1524+m.female_married_1524+m.female_widowed_1524+m.female_divorced_1524) as total1524,
+                (m.male_single_2539+m.male_married_2539+m.male_widowed_2539+m.male_divorced_2539+
+                m.female_single_2539+m.female_married_2539+m.female_widowed_2539+m.female_divorced_2539) as total2539,
+                (m.male_single_4059+m.male_married_4059+m.male_widowed_4059+m.male_divorced_4059+
+                m.female_single_4059+m.female_married_4059+m.female_widowed_4059+m.female_divorced_4059) as total4059,
+                (m.male_single_60+m.male_married_60+m.male_widowed_60+m.male_divorced_60+
+                m.female_single_60+m.female_married_60+m.female_widowed_60+m.female_divorced_60) as total60
+                from statesmarital m
+                where m.state_id = """+state_id+"""
+                order by m.state_id"""
+
+    ageresult = db.session.execute(query).first()
+
+    result = []
+    result = [{"key": "15 - 24 yrs", "y": ageresult.total1524},
+              {"key": "25 - 39 yrs", "y": ageresult.total2539},
+              {"key": "40 - 59 yrs", "y": ageresult.total4059},
+              {"key": "60 +", "y": ageresult.total60}]
     return jsonify(result=result)
 
 

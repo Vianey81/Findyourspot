@@ -110,51 +110,28 @@
         <div id = "mapform" class="container">
             
         </div>
-         <div id="details" class="hidden">
-            {% raw %}
-                <script id="template" type="text/html">
-                  <h3>{{ name }}</h3>
-                  <table>
-                    <tr>
-                      <th>Marital & Age:</th>
-
-                      <td>{{totalmarital}} %</td>
-                    </tr>
-                    <tr>
-                      <th>Cost of Living:</th>
-                      <td>{{ livingrank }} </td>
-                    </tr>
-                    <tr>
-                      <th>Profession:</th>
-                      <td>{{ professionrank }} </td>
-                    </tr>
-                    <tr>
-                      <th>Crime Rank:</th>
-                      <td>{{ crimerank }} </td>
-                    </tr>
-                    <tr>
-                      <th>Total Rank:</th>
-                      <td>{{ rate }} </td>
-                    </tr>
-                  </table>
-                </script>
-        
-</div>
-
+         
+        {% raw %}
         <div id="charts" >
           <div class="row" >
             <div class="col-lg-4">
-
-
-            <button id="crimebtn" ng-click="onclick1()" hidden=true></button>
-            <nvd3 options="options" data="data1"></nvd3>
-
-
-        {% endraw %}
+                <button id="crimebtn" ng-click="onclickcrime()" hidden=true></button>
+                <h3>Crime by State</h3>
+                <nvd3 options="options" data="datacrime"></nvd3>
+            </div>
+            <div class="col-lg-4">
+                <button id="maritalbtn" ng-click="onclickmarital()" hidden=true></button>
+                <h3>Marital Status %</h3>
+                <nvd3 options="options" data="datamarital">Marital</nvd3>
+            </div>
+            <div class="col-lg-4">
+                <button id="agebtn" ng-click="onclickage()" hidden=true></button>
+                <h3>Population by Age %</h3>
+                <nvd3 options="options" data="dataage">Age</nvd3>
             </div>
           </div>
         </div>
-    
+        {% endraw %}
         <!-- Container of the Data Table -->
         <div id="infoform" class="container" >
             <div class="row">
