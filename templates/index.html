@@ -4,175 +4,241 @@
 {% endblock %}
 {% block body %}
 
-    <div class="site-wrapper">
-    <div class="site-wrapper-inner">
+<!--  <div class="site-wrapper">
+    <div class="site-wrapper-inner">-->
+<!--      <div class="col-xs-12 col-md-4">
+                <h1>Let's Play!</h1>
+                Container of the search 
+                <div id="searchform" class="contaniner">
 
-        <h1>Let's Play!</h1>
-        <!-- Container of the search -->
-        <div id="searchform" class="contaniner">
-              <div class="row">
-                
-                <div class="panel panel-primary col-xs-12 col-md-3" style="height: 220px;">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">Marital Status & Age</h3>
-                  </div>
-                  <div class="panel-body" >
-                    <div class="col-xs-12 col-md-12">
-                                <input type="range" min="0" max="2" style="width:100%;">
-                                <output class="opcMarital" id="valor">4</output>
-                            </div>
-
+                      <div class="row">
+                        <div class="panel panel-success col-xs-12 col-md-12" style="height: 140px;">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Cost of Living</h3>
+                          </div>
+                          <div class="panel-body">
                             <div class="col-xs-12 col-md-12">
-                                <label class="control-label">Age:</label>
-                                    <select data-placeholder="Choose your Age" class="form-control chzn-select" id="age">
-                                            <option value="1524">15 - 24 yrs</option>
-                                            <option value="2539">25 - 39 yrs</option>
-                                            <option value="4059">40 - 59 yrs</option>
-                                            <option value="60">60 - 90 yrs</option>
-                                    </select>
-               
-                            </div>
+                                  
+                                  <input name="living" type="range" min="0" max="2" style="width:100%;">
+                                  <output class="opcLiving" id="valor" hidden=true>4</output>
+                                  <span id="valueliving">Somewhat Important</span>
+                            </div> 
+
+                                  <label class="control-label col-md-4">Legal Situation:</label>
+
+                                  <div class="col-md-8">
+                                      <select class="form-control" id="tax">
+                                          
+                                        <option value="1ad">Living Alone</option>
+                                        <option value="2ad">Living with a partner</option>
+                                        <option value="22">Living with a partner with children</option>
+                                          
+                                      </select>
+                                  </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="panel panel-info col-xs-12 col-md-12" style="height: 220px;">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Best Salary</h3>
+                          </div>
+                          <div class="panel-body">
                             <div class="col-xs-12 col-md-12">
-                                <label class="control-label">Marital Status</label>
-                                    <select class="form-control" id="marital">                            
-                                            <option value="single">Single</option>
-                                            <option value="married">Married</option>
-                                            <option value="widowed">Widowed</option>
-                                            <option value="divorced">Divorced</option>                          
-                                    </select>
-                                </div>
-                  </div>
-                </div>
-                
-                                
+                                  <input name="profession" type="range" min="0" max="2" style="width:100%;">
+                                  <output class="opcProfession" hidden=true>4</output>
+                                  <span id="valueprofession">Somewhat Important</span>
+                            </div> 
 
-                <div class="panel panel-success col-xs-12 col-md-3" style="height: 220px;">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">Cost of Living</h3>
-                  </div>
-                  <div class="panel-body">
-                    <div class="col-xs-12 col-md-12">
-                                    <input type="range" min="0" max="2" style="width:100%;">
-                                    <output class="opcLiving" id="valor" >4</output>
-                                </div> 
-
-                                <label class="control-label col-md-12">Legal Situation:</label>
-
-                                <div class="col-md-12">
-                                    <select class="form-control" id="tax">
-                                        
-                                            <option value="1ad">Living Alone</option>
-                                            <option value="2ad">Living with a partner</option>
-                                            <option value="22">Living with a partner with children</option>
-                                        
-                                    </select>
-                                </div>
-                  </div>
-                </div>
-                
-                <div class="panel panel-info col-xs-12 col-md-3" style="height: 220px;">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">Best Salary</h3>
-                  </div>
-                  <div class="panel-body">
-                    <div class="col-xs-12 col-md-12">
-                                    <input type="range" min="0" max="2" style="width:100%;">
-                                    <output class="opcProfession" >4</output>
-                                </div> 
-
-                                    <div class="col-md-12">
-                                        <label class="control-label">Professions:</label>
-                                        <select data-placeholder="YOUR TEXT" class="form-control chzn-select" id="profession">
-                                            {% for profession in professions %}
-                                                <option value="{{ profession.title }}">{{ profession.title }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                  </div>
-                </div>
-                
-                <div class="panel panel-warning col-xs-12 col-md-3" style="height: 220px;">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">Crime</h3>
-                  </div>
-                  <div class="panel-body">
-                    <div class="col-xs-12 col-md-12">
-                                    <input type="range" min="0" max="2" style="width:100%;">
-                                    <output class="opcCrime" id="valor">4</output>
-                                </div>
-                  </div>
-                </div>
-              
-              </div>
-        </div>
-
-        <!-- Container of the map -->
-        <div id = "mapform" class="container">
-            
-        </div>
-         
-        {% raw %}
-        <div id="charts" >
-          <div class="row" >
-            <div class="col-lg-4">
-                <button id="crimebtn" ng-click="onclickcrime()" hidden=true></button>
-                <h3>Crime by State</h3>
-                <nvd3 options="options" data="datacrime"></nvd3>
-            </div>
-            <div class="col-lg-4">
-                <button id="maritalbtn" ng-click="onclickmarital()" hidden=true></button>
-                <h3>Marital Status %</h3>
-                <nvd3 options="options" data="datamarital">Marital</nvd3>
-            </div>
-            <div class="col-lg-4">
-                <button id="agebtn" ng-click="onclickage()" hidden=true></button>
-                <h3>Population by Age %</h3>
-                <nvd3 options="options" data="dataage">Age</nvd3>
-            </div>
-          </div>
-        </div>
-        {% endraw %}
-        <!-- Container of the Data Table -->
-        <div id="infoform" class="container" >
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <p id="ptable">All the counties</p>
+                                  <div class="col-md-12">
+                                      <label class="control-label">Select your profession:</label>
+                                      <select class="selectpicker" data-live-search="true" data-width='330px' id="profession">
+                                          {% for profession in professions %}
+                                              <option value="{{ profession.title }}">{{ profession.title }}</option>
+                                          {% endfor %}
+                                      </select>
+                                  </div>
+                                  <div class="col-md-12">
+                                      <label class="control-label">Select your partner profession:</label>
+                                      <select class="selectpicker" data-live-search="true" data-width='330px' id="professionpartner">
+                                          {% for profession in professions %}
+                                              <option value="{{ profession.title }}">{{ profession.title }}</option>
+                                          {% endfor %}
+                                      </select>
+                                  </div>
+                          </div>
                         </div>
-                        <div class="panel-body">
-                            <div >
-                                <table id="infotable" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Cost of Living</th>
-                                            <th>Avg. Prof. Salary</th>
-                                            <th>Marital & Age</th>
-                                            <th>Crime</th>
-                                            <th>Total</th>
-                                        </tr>
-                                    </thead>
-                                    
-                                </table>
+                      </div>
+
+                      <div class="row">
+                        <div class="panel panel-warning col-xs-12 col-md-12" style="height: 100px;">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Crime</h3>
+                          </div>
+                          <div class="panel-body">
+                            <div class="col-xs-12 col-md-12">
+                                <input name = "crime" type="range" min="0" max="2" style="width:100%;">
+                                <output class="opcCrime" id="valor" hidden=true>4</output>
+                                <span id="valuecrime">Somewhat Important</span>
                             </div>
-                           
+                          </div>
                         </div>
+                      </div>
+
+                      <div class="row">
+                        
+                        <div class="panel panel-primary col-xs-12 col-md-12" style="height: 170px;">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Marital Status & Age</h3>
+                          </div>
+                          <div class="panel-body" >
+                            <div class="col-xs-12 col-md-12">
+                                  <input name="marital" type="range" min="0" max="2" style="width:100%;">
+                                  <output class="opcMarital" id="valor" hidden=true>4</output>
+                                  <span id="valuemarital">Somewhat Important</span>
+                            </div>
+
+                                  <div class="col-xs-12 col-md-6">
+                                      <label class="control-label">Age:</label>
+                                      <select data-placeholder="Choose your Age" class="form-control" id="age">
+                                              <option value="1524">15 - 24 yrs</option>
+                                              <option value="2539">25 - 39 yrs</option>
+                                              <option value="4059">40 - 59 yrs</option>
+                                              <option value="60">60 - 90 yrs</option>
+                                      </select>
+                     
+                                  </div>
+                                  <div class="col-xs-12 col-md-6">
+                                      <label class="control-label">Marital Status</label>
+                                      <select class="form-control" id="marital">                            
+                                              <option value="single">Single</option>
+                                              <option value="married">Married</option>
+                                              <option value="widowed">Widowed</option>
+                                              <option value="divorced">Divorced</option>                          
+                                      </select>
+                                  </div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+      </div> -->
+
+      <div id="result" class="col-xs-12 col-md-8">
+
+                <!-- Container of the map -->
+                <div id = "mapform" class="container">
+                    
+                </div>
+                 <!-- Show charts when mouse over or mouse click -->
+                 <div class="row">
+                    <div class="col-xs-12 col-md-8">
+                      <h3><span id="nameState"></span></h3>
+                      <pre id="output" hidden=true>
+
+                      </pre>
                     </div>
+                    
+                 </div>
+                {% raw %}
+                <div id="chartsbystate" class="container" hidden=true>
+                  <div class="row" >
+                    <div class="col-lg-4">
+                        <button id="crimebtn" ng-click="onclickcrime()" hidden=true></button>
+                        <h3>Crime by State</h3>
+                        <nvd3 options="optionsbystate" data="datacrime"></nvd3>
+                    </div>
+                    <div class="col-lg-4">
+                        <button id="maritalbtn" ng-click="onclickmarital()" hidden=true></button>
+                        <h3>Marital Status %</h3>
+                        <nvd3 options="optionsbystate" data="datamarital">Marital</nvd3>
+                    </div>
+                    <div class="col-lg-4">
+                        <button id="agebtn" ng-click="onclickage()" hidden=true></button>
+                        <h3>Population by Age %</h3>
+                        <nvd3 options="optionsbystate" data="dataage">Age</nvd3>
+                    </div>
+                  </div>
                 </div>
-        
-        </div>
+                <div id="chartsgral" class="container">
+                  <div class="row">
+                      <div class="col-xs-12 col-md-4">
+                        <h5>Show the TOP: </h5>
+                        <select class="form-control" id="ntop">
+                                          
+                              <option value="3">3 States</option>
+                              <option value="5">5 States</option>
+                              <option value="10">10 States</option>
+                                          
+                        </select>
+                      </div>
+                    </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                        <button id="chgChartCP" ng-click="onclickdata()" hidden=true></button>
+                        <nvd3 options="optionsgral" data="data"></nvd3>
+                    </div>
+                    <div class="col-lg-6">
+                        <button id="chgChartML" ng-click="onclickdata2()" hidden=true></button>
+                        <nvd3 options="optionsgral" data="data2"></nvd3>
+                    </div>
+                  </div>
+                </div>
+                {% endraw %}
+                <!-- Container of the Data Table -->
+                <div id="infoform" class="container" >
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <p id="ptable">All the counties</p>
+                                </div>
+                                <div class="panel-body">
+                                    <div >
+                                        <table id="infotable" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Min. Wage</th>
+                                                    <th>Avg. Salary</th>
+                                                    <th>Partner Salary</th>
+                                                    <th>Difference</th>
+                                                    <th>Marital & Age</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                            
+                                        </table>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                
+                    </div>
 
-        
-    </div>
-</div>
+                
+                </div>
+      </div>
+
+<!--</div>
+</div>-->
 
 <script>
     // function to change the value of the Slider
     function valueOutput(element) {
         var value = element.value,
-            output = element.parentNode.getElementsByTagName('output')[0];
+
+        output = element.parentNode.getElementsByTagName('output')[0];
         output.innerHTML = value * 4;
+        var name = element.getAttribute("name");
+        if (value == 2) {
+          $('#value'+name).html("Must Have");
+        }else if (value == 1) {
+          $('#value'+name).html("Somewhat Important");
+        }else if (value == 0){
+          $('#value'+name).html("Not Important");
+        }
         
     }
 
@@ -192,6 +258,24 @@
         }, false);
     });
 
+    $('#tax').on('change', function(){
+      if ($('#tax').val() == '1ad') {
+              $('#professionpartner').prop( 'disabled', 'disabled' );
+            } else {
+              $('#professionpartner').prop( 'disabled', false );
+            }
+    });
+
+    $('#profession').on('changed.bs.select', function (e) {
+        loadNewData(); 
+    });
+    $('#professionpartner').on('changed.bs.select', function (e) {       
+        loadNewData(); 
+    });
+    $('#professionpartner').on('loaded.bs.select', function (e) {       
+        $('#professionpartner').prop( 'disabled', 'disabled' );
+    });
+
     // Set the url ajax to the Data Table
     $(document).ready(function() {
 
@@ -199,11 +283,19 @@
       var profession = $('#profession').val();
       var age = $('#age').val();
       var marital = $('#marital').val();
+      var professionpartner = $('#professionptn').val();
       var wl = $('.opcLiving').val();
       var wp = $('.opcProfession').val();
       var wc = $('.opcCrime').val();
       var wm = $('.opcMarital').val();
-      var urlbystate = "/search_counties?state_id="+state_id+"&tax="+tax+"&profession="+profession+"&age="+age+"&marital="+marital+"&opcLiving="+wl+"&opcMarital="+wm+"&opcCrime="+wc+"&opcProfession="+wp;
+      var urlbystate = ""
+
+      if ($('#tax').val()=='1ad') {
+          professionpartner = 'None';
+      }
+
+      urlbystate = "/search_counties?state_id="+state_id+"&tax="+tax+"&profession="+profession+"&professionptn="+professionpartner+"&age="+age+"&marital="+marital+"&opcLiving="+wl+"&opcMarital="+wm+"&opcCrime="+wc+"&opcProfession="+wp;
+
 
       var table = $('#infotable').dataTable( {
               "ajax": {
@@ -212,17 +304,34 @@
               },
               "columns": [
                 { "data": "name" },
-                { "data": "livingrank" },
+                { "data": "wage" },
+                { "data": "amean" },
+                { "data": "professionptn" },
                 { "data": "professionrank" },
                 { "data": "totalmarital" },
-                { "data": "crimerank" },
                 { "data": "rate" }
                 ],
                 "order": [[ 5, "desc" ]]
             } );
 
-         
     } );
+
+$(function(){
+
+  $('#slide-submenu').on('click',function() {             
+        $(this).closest('.list-group').fadeOut('slide',function(){
+          $('.mini-submenu').fadeIn();  
+          $('#result').removeClass('col-xs-12 col-md-8').addClass('col-xs-12 col-md-11')
+        });
+        
+      });
+
+  $('.mini-submenu').on('click',function(){   
+        $(this).next('.list-group').toggle('slide');
+        $('.mini-submenu').hide();
+        $('#result').removeClass('col-xs-12 col-md-11').addClass('col-xs-12 col-md-8')
+  })
+})
 
 
 </script>

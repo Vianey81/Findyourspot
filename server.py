@@ -34,6 +34,13 @@ def index():
     return render_template("index.html", professions=professions)
 
 
+@app.route('/prueba')
+def prueba():
+    """Testing Jasny."""
+
+    return render_template("rank.html")
+
+
 @app.route('/search_states')
 def search_states():
     """Search the top states with the info in the search form."""
@@ -47,7 +54,9 @@ def search_states():
     wp = int(request.args.get("opcProfession"))
     wc = int(request.args.get("opcCrime"))
     wm = int(request.args.get("opcMarital"))
-    top_states = ranking.get_top_states(tax, profession, mstatus, wl, wp, wc, wm)
+    professionptn = request.args.get("professionptn")
+    top_states = ranking.get_top_states(tax, profession, mstatus, wl, wp, wc, wm, professionptn.strip())
+
     return jsonify(data=top_states)
 
 
@@ -64,12 +73,12 @@ def search_counties():
     wp = int(request.args.get("opcProfession"))
     wc = int(request.args.get("opcCrime"))
     wm = int(request.args.get("opcMarital"))
-
+    professionptn = request.args.get("professionptn")
     if (request.args.get("state_id")):
         state_id = request.args.get("state_id")
-        top_counties = ranking.counties_by_id(state_id, tax, profession, mstatus, wl, wp, wc, wm)
+        top_counties = ranking.counties_by_id(state_id, tax, profession, mstatus, wl, wp, wc, wm, professionptn.strip())
     else:
-        top_counties = ranking.get_top_counties(tax, profession, mstatus, wl, wp, wc, wm)
+        top_counties = ranking.get_top_counties(tax, profession, mstatus, wl, wp, wc, wm, professionptn.strip())
     return jsonify(data=top_counties)
 
 
@@ -119,9 +128,9 @@ def marital_json():
                 m.female_widowed_1524+m.female_widowed_2539+m.female_widowed_4059+m.female_widowed_60) as totalwidowed,
                 (m.male_divorced_1524+m.male_divorced_2539+m.male_divorced_4059+m.male_divorced_60+
                 m.female_divorced_1524+m.female_divorced_2539+m.female_divorced_4059+m.female_divorced_60) as totaldivorced
-               from statesmarital m
-               where m.state_id = """+state_id+"""
-               order by m.state_id"""
+                from statesmarital m
+                where m.state_id = """+state_id+"""
+                order by m.state_id"""
 
     maritalresult = db.session.execute(query).first()
 
@@ -160,6 +169,27 @@ def age_json():
               {"key": "40 - 59 yrs", "y": ageresult.total4059},
               {"key": "60 +", "y": ageresult.total60}]
     return jsonify(result=result)
+
+
+@app.route('/chartsgral.json')
+def chartsgral_json():
+    """ Generate the charts for the given search."""
+
+    tax = request.args.get("tax")
+    chart = request.args.get("chart")
+    profession = request.args.get("profession")
+    age = request.args.get("age")
+    marital = request.args.get("marital")
+    mstatus = marital + "_" + age
+    wl = int(request.args.get("opcLiving"))
+    wp = int(request.args.get("opcProfession"))
+    wc = int(request.args.get("opcCrime"))
+    wm = int(request.args.get("opcMarital"))
+    professionptn = request.args.get("professionptn")
+    ntop = int(request.args.get("ntop"))
+    top_states = ranking.top_chart_states(chart, tax, profession, mstatus, wl, wp, wc, wm, ntop, professionptn.strip())
+
+    return jsonify(result=top_states)
 
 
 @app.route('/map_states')
