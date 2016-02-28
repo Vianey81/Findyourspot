@@ -1,9 +1,8 @@
 """Utility file to seed ratings database from MovieLens data in seed_data/"""
 
 from sqlalchemy import func
-from model import State, County, StatePopulation, CountyPopulation
+from model import State, County, CountyMarital, StateCrime, CountyCrime
 from model import StateProfession, StateLiving, CountyLiving, StateMarital
-from model import CountyMarital, StateCrime, CountyCrime
 # from dateutil import parser
 import datetime
 
@@ -26,22 +25,40 @@ def load_states():
     # Read identifiers.csv file and insert data
     df = pd.read_csv('data/identifiers.csv')
     print(df.columns)
+
     states = df.groupby("sh_state").first()
+    df2 = pd.read_csv('data/DataIncomeCounty.csv').fillna(0)
+    income_states = df2[(df2.State == 'State')]
 
     for index, row in states.iterrows():
         sh_state = row[0]
         name = row[2]
+        x = income_states[income_states['County-equivalent'] == name]
         id_state = row[3]
         longitude = row[5]
         latitude = row[6]
+        if (not x.empty):
+            percapita_income = x.iloc[0]['Per capita']
+            median_household_income = x.iloc[0]['Median household']
+            population = x.iloc[0]['Population']
+            number_households = x.iloc[0]['number households']
+        else:
+            percapita_income = 0
+            median_household_income = 0
+            population = 0
+            number_households = 0
 
         state = State(state_id=id_state,
                       name=name,
                       short_name=sh_state,
                       longitude=longitude,
-                      latitude=latitude)
+                      latitude=latitude,
+                      percapita_income = percapita_income,
+                      median_household_income = median_household_income,
+                      population = population,
+                      number_households = number_households)
 
-        print sh_state, "-", name, "-", id_state, longitude, latitude
+        print sh_state, "-", name, "-", id_state, longitude, latitude, percapita_income, median_household_income
         print state
 
         # We need to add to the session or it won't ever be stored
@@ -63,21 +80,38 @@ def load_counties():
     # Read identifiers.csv file and insert data
     df = pd.read_csv('data/identifiers.csv')
     print(df.columns)
+    df2 = pd.read_csv('data/DataIncomeCounty.csv').fillna(0)
+    income_counties = df2[(df2.State != 'State')]
 
     for index, row in df.iterrows():
         name = row[2]
+        x = income_counties[income_counties['County-equivalent'].str.contains(name)]
         id_state = row[4]
         id_county = row[5]
         longitude = row[6]
         latitude = row[7]
+        if (not x.empty):
+            percapita_income = x.iloc[0]['Per capita']
+            median_household_income = x.iloc[0]['Median household']
+            population = x.iloc[0]['Population']
+            number_households = x.iloc[0]['number households']
+        else:
+            percapita_income = 0
+            median_household_income = 0
+            population = 0
+            number_households = 0
 
         county = County(county_id=id_county,
                         name=name,
                         state_id=id_state,
                         longitude=longitude,
-                        latitude=latitude)
+                        latitude=latitude,
+                        percapita_income = percapita_income,
+                        median_household_income = median_household_income,
+                        population = population,
+                        number_households = number_households)
 
-        print id_state, "-", name, "-", id_county, longitude, latitude
+        print id_state, "-", name, "-", id_county, longitude, latitude, percapita_income, median_household_income
 
         # We need to add to the session or it won't ever be stored
         db.session.add(county)

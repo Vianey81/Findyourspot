@@ -235,7 +235,7 @@ function showDetails(id) {
   getValuesFrm();
   urlbystate = "";
 
-  urlbystate = "/search_counties?state_id="+state_id+"&tax="+tax+"&profession="+profession+"&professionptn="+professionptn+"+&age="+age+"&marital="+marital+"&opcLiving="+wl+"&opcMarital="+wm+"&opcCrime="+wc+"&opcProfession="+wp;
+  urlbystate = "/search_counties?state_id="+state_id+"&tax="+tax;
 
   var table = $('#infotable').DataTable();
 
@@ -258,7 +258,8 @@ app.controller('MainCtrl', function($scope) {
         $scope.optionsbystate = {
             chart: {
                 type: 'pieChart',
-                height: 250,
+                height: 350,
+                width: 350,
                 x: function(d){return d.key;},
                 y: function(d){return d.y;},
                 showLabels: true,

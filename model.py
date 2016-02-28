@@ -22,6 +22,10 @@ class State(db.Model):
     short_name = db.Column(db.String(4), nullable=True)
     longitude = db.Column(db.Float, nullable=True)
     latitude = db.Column(db.Float, nullable=True)
+    percapita_income = db.Column(db.Float, nullable=True, default=0)
+    median_household_income = db.Column(db.Float, nullable=True, default=0)
+    population = db.Column(db.Float, nullable=True, default=0)
+    number_households = db.Column(db.Integer, nullable=True, default=0)
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -39,74 +43,78 @@ class County(db.Model):
     name = db.Column(db.String(100), nullable=True)
     longitude = db.Column(db.Float, nullable=True)
     latitude = db.Column(db.Float, nullable=True)
+    percapita_income = db.Column(db.Float, nullable=True, default=0)
+    median_household_income = db.Column(db.Float, nullable=True, default=0)
+    population = db.Column(db.Float, nullable=True, default=0)
+    number_households = db.Column(db.Integer, nullable=True, default=0)
 
     #Define the relationship to the State
     state = db.relationship("State",
                             backref=db.backref("counties", order_by=county_id))
 
 
-class StatePopulation(db.Model):
-    """Population data of Find your spot website."""
+# class StatePopulation(db.Model):
+#     """Population data of Find your spot website."""
 
-    __tablename__ = "statespopulation"
+#     __tablename__ = "statespopulation"
 
-    spop_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    state_id = db.Column(db.Integer, db.ForeignKey('states.state_id'))
-    med_female_age = db.Column(db.Integer, nullable=True)
-    med_male_age = db.Column(db.Integer, nullable=True)
-    population = db.Column(db.Integer, nullable=True)
-    pop_white = db.Column(db.Integer, nullable=True)
-    pop_black = db.Column(db.Integer, nullable=True)
-    pop_hispanic = db.Column(db.Integer, nullable=True)
-    pop_other = db.Column(db.Integer, nullable=True)
-    pop_hawaiian = db.Column(db.Integer, nullable=True)
-    med_home_value = db.Column(db.Integer, nullable=True)
-    med_gross_rent = db.Column(db.Integer, nullable=True)
-    med_commute = db.Column(db.Integer, nullable=True)
-    med_income = db.Column(db.Integer, nullable=True)
-    poverty_rate = db.Column(db.Integer, nullable=True)
+#     spop_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+#     state_id = db.Column(db.Integer, db.ForeignKey('states.state_id'))
+#     med_female_age = db.Column(db.Integer, nullable=True)
+#     med_male_age = db.Column(db.Integer, nullable=True)
+#     population = db.Column(db.Integer, nullable=True)
+#     pop_white = db.Column(db.Integer, nullable=True)
+#     pop_black = db.Column(db.Integer, nullable=True)
+#     pop_hispanic = db.Column(db.Integer, nullable=True)
+#     pop_other = db.Column(db.Integer, nullable=True)
+#     pop_hawaiian = db.Column(db.Integer, nullable=True)
+#     med_home_value = db.Column(db.Integer, nullable=True)
+#     med_gross_rent = db.Column(db.Integer, nullable=True)
+#     med_commute = db.Column(db.Integer, nullable=True)
+#     med_income = db.Column(db.Integer, nullable=True)
+#     poverty_rate = db.Column(db.Integer, nullable=True)
 
-    #Define relationship to the State
-    state = db.relationship("State",
-                            backref=db.backref("population", order_by=spop_id))
+#     #Define relationship to the State
+#     state = db.relationship("State",
+#                             backref=db.backref("population", order_by=spop_id))
 
-    def __repr__(self):
-        """Provide helpful representation when printed."""
+#     def __repr__(self):
+#         """Provide helpful representation when printed."""
 
-        return "<Population by State pop_id=%s state_id=%s>" % (
-            self.spop_id, self.state_id)
+#         return "<Population by State pop_id=%s state_id=%s>" % (
+#             self.spop_id, self.state_id)
 
 
-class CountyPopulation(db.Model):
-    """Population data by County of Find your spot website."""
+# class CountyPopulation(db.Model):
+#     """Population data by County of Find your spot website."""
 
-    __tablename__ = "countiespopulation"
+#     __tablename__ = "countiespopulation"
 
-    cpop_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    county_id = db.Column(db.Integer, db.ForeignKey('counties.county_id'))
-    med_female_age = db.Column(db.Integer, nullable=True)
-    med_male_age = db.Column(db.Integer, nullable=True)
-    population = db.Column(db.Integer, nullable=True)
-    pop_white = db.Column(db.Integer, nullable=True)
-    pop_black = db.Column(db.Integer, nullable=True)
-    pop_hispanic = db.Column(db.Integer, nullable=True)
-    pop_other = db.Column(db.Integer, nullable=True)
-    pop_hawaiian = db.Column(db.Integer, nullable=True)
-    med_home_value = db.Column(db.Integer, nullable=True)
-    med_gross_rent = db.Column(db.Integer, nullable=True)
-    med_commute = db.Column(db.Integer, nullable=True)
-    med_income = db.Column(db.Integer, nullable=True)
-    poverty_rate = db.Column(db.Integer, nullable=True)
+#     cpop_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+#     county_id = db.Column(db.Integer, db.ForeignKey('counties.county_id'))
+#     med_female_age = db.Column(db.Integer, nullable=True)
+#     med_male_age = db.Column(db.Integer, nullable=True)
+#     population = db.Column(db.Integer, nullable=True)
+#     pop_white = db.Column(db.Integer, nullable=True)
+#     pop_black = db.Column(db.Integer, nullable=True)
+#     pop_hispanic = db.Column(db.Integer, nullable=True)
+#     pop_other = db.Column(db.Integer, nullable=True)
+#     pop_hawaiian = db.Column(db.Integer, nullable=True)
+#     med_home_value = db.Column(db.Integer, nullable=True)
+#     med_gross_rent = db.Column(db.Integer, nullable=True)
+#     med_commute = db.Column(db.Integer, nullable=True)
+#     med_income = db.Column(db.Integer, nullable=True)
+#     poverty_rate = db.Column(db.Integer, nullable=True)
 
-    #Define relationship to the State
-    county = db.relationship("County",
-                             backref=db.backref("population", order_by=cpop_id))
+#     #Define relationship to the State
+#     county = db.relationship("County",
+#                              backref=db.backref("population", order_by=cpop_id))
 
-    def __repr__(self):
-        """Provide helpful representation when printed."""
+#     def __repr__(self):
+#         """Provide helpful representation when printed."""
 
-        return "<Population by County pop_id=%s state_id=%s>" % (
-            self.cpop_id, self.county_id)
+#         return "<Population by County pop_id=%s state_id=%s>" % (
+#             self.cpop_id, self.county_id)
 
 
 class StateProfession(db.Model):
@@ -117,8 +125,8 @@ class StateProfession(db.Model):
     sprof_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     state_id = db.Column(db.Integer, db.ForeignKey('states.state_id'))
     title = db.Column(db.String(255), nullable=True)
-    a_mean = db.Column(db.Float, nullable=True)
-    jobs_1000 = db.Column(db.Float, nullable=True)
+    a_mean = db.Column(db.Float, nullable=True, default=0)
+    jobs_1000 = db.Column(db.Float, nullable=True, default=0)
     level = db.Column(db.String(100), nullable=True)
 
     #Define relationship to the State
@@ -139,14 +147,14 @@ class StateLiving(db.Model):
 
     sliv_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     state_id = db.Column(db.Integer, db.ForeignKey('states.state_id'))
-    wage_1ad = db.Column(db.Float, nullable=True)
-    wage_2ad = db.Column(db.Float, nullable=True)
-    wage_22 = db.Column(db.Float, nullable=True)
-    tax_1ad = db.Column(db.Float, nullable=True)
-    tax_2ad = db.Column(db.Float, nullable=True)
-    tax_22 = db.Column(db.Float, nullable=True)
-    rank = db.Column(db.Integer, nullable=True)
-    index = db.Column(db.Float, nullable=True)
+    wage_1ad = db.Column(db.Float, nullable=True, default=0)
+    wage_2ad = db.Column(db.Float, nullable=True, default=0)
+    wage_22 = db.Column(db.Float, nullable=True, default=0)
+    tax_1ad = db.Column(db.Float, nullable=True, default=0)
+    tax_2ad = db.Column(db.Float, nullable=True, default=0)
+    tax_22 = db.Column(db.Float, nullable=True, default=0)
+    rank = db.Column(db.Integer, nullable=True, default=0)
+    index = db.Column(db.Float, nullable=True, default=0)
 
     #Define relationship to the State
     state = db.relationship("State",
@@ -166,14 +174,14 @@ class CountyLiving(db.Model):
 
     cliv_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     county_id = db.Column(db.Integer, db.ForeignKey('counties.county_id'))
-    wage_1ad = db.Column(db.Float, nullable=True)
-    wage_2ad = db.Column(db.Float, nullable=True)
-    wage_22 = db.Column(db.Float, nullable=True)
-    tax_1ad = db.Column(db.Float, nullable=True)
-    tax_2ad = db.Column(db.Float, nullable=True)
-    tax_22 = db.Column(db.Float, nullable=True)
-    rank = db.Column(db.Integer, nullable=True)
-    index = db.Column(db.Float, nullable=True)
+    wage_1ad = db.Column(db.Float, nullable=True, default=0)
+    wage_2ad = db.Column(db.Float, nullable=True, default=0)
+    wage_22 = db.Column(db.Float, nullable=True, default=0)
+    tax_1ad = db.Column(db.Float, nullable=True, default=0)
+    tax_2ad = db.Column(db.Float, nullable=True, default=0)
+    tax_22 = db.Column(db.Float, nullable=True, default=0)
+    rank = db.Column(db.Integer, nullable=True, default=0)
+    index = db.Column(db.Float, nullable=True, default=0)
 
     #Define relationship to the County
     county = db.relationship("County",
@@ -301,14 +309,14 @@ class StateCrime(db.Model):
 
     scri_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     state_id = db.Column(db.Integer, db.ForeignKey('states.state_id'))
-    violent_rate = db.Column(db.Float, nullable=True)
-    murder_rate = db.Column(db.Float, nullable=True)
-    rape_rate = db.Column(db.Float, nullable=True)
-    assault_rate = db.Column(db.Float, nullable=True)
-    robery_rate = db.Column(db.Float, nullable=True)
-    property_rate = db.Column(db.Float, nullable=True)
-    motor_rate = db.Column(db.Float, nullable=True)
-    total = db.Column(db.Float, nullable=True)
+    violent_rate = db.Column(db.Float, nullable=True, default=0)
+    murder_rate = db.Column(db.Float, nullable=True, default=0)
+    rape_rate = db.Column(db.Float, nullable=True, default=0)
+    assault_rate = db.Column(db.Float, nullable=True, default=0)
+    robery_rate = db.Column(db.Float, nullable=True, default=0)
+    property_rate = db.Column(db.Float, nullable=True, default=0)
+    motor_rate = db.Column(db.Float, nullable=True, default=0)
+    total = db.Column(db.Float, nullable=True, default=0)
 
     #Define relationship to the State
     state = db.relationship("State",
@@ -328,14 +336,14 @@ class CountyCrime(db.Model):
 
     ccri_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     county_id = db.Column(db.Integer, db.ForeignKey('counties.county_id'))
-    violent_rate = db.Column(db.Float, nullable=True)
-    murder_rate = db.Column(db.Float, nullable=True)
-    rape_rate = db.Column(db.Float, nullable=True)
-    assault_rate = db.Column(db.Float, nullable=True)
-    robery_rate = db.Column(db.Float, nullable=True)
-    property_rate = db.Column(db.Float, nullable=True)
-    motor_rate = db.Column(db.Float, nullable=True)
-    total = db.Column(db.Float, nullable=True)
+    violent_rate = db.Column(db.Float, nullable=True, default=0)
+    murder_rate = db.Column(db.Float, nullable=True, default=0)
+    rape_rate = db.Column(db.Float, nullable=True, default=0)
+    assault_rate = db.Column(db.Float, nullable=True, default=0)
+    robery_rate = db.Column(db.Float, nullable=True, default=0)
+    property_rate = db.Column(db.Float, nullable=True, default=0)
+    motor_rate = db.Column(db.Float, nullable=True, default=0)
+    total = db.Column(db.Float, nullable=True, default=0)
 
     #Define relationship to the County
     state = db.relationship("County",

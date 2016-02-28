@@ -1,7 +1,7 @@
 """Utility file to calculate the rankings """
 
 from sqlalchemy import func
-from model import State, County, StatePopulation, CountyPopulation
+from model import State, County
 from model import StateProfession, StateLiving, CountyLiving, StateMarital
 from model import CountyMarital, StateCrime, CountyCrime
 from flask import session
@@ -12,7 +12,7 @@ from pandas import DataFrame
 import pandas as pd
 
 from model import connect_to_db, db
-from server import app
+# from server import app
 
 
 def get_top_counties(tax, profession, marital, wl, wp, wc, wm, professionptn='None'):
@@ -73,47 +73,62 @@ def get_top_counties(tax, profession, marital, wl, wp, wc, wm, professionptn='No
     return rank_counties
 
 
-def counties_by_id(state_id, tax, profession, marital, wl, wp, wc, wm, professionptn='None'):
-    """ Get Info  of the given State and return a dictionary with all its counties"""
+# def counties_by_id(state_id, tax, profession, marital, wl, wp, wc, wm, professionptn='None'):
+#     """ Get Info  of the given State and return a dictionary with all its counties"""
 
-    query = """select co.state_id, co.county_id, co.name, sl.rank as livingrank,
-               (cp.a_mean-cl.tax_"""+tax+""")as professionrank,
-               cl.tax_"""+tax+""" as wage,
-               cp.a_mean as amean,
-               cc.total as crimerank,
-               (cm.male_"""+marital+""" + cm.female_"""+marital+""") as totalmarital
+#     query = """select co.state_id, co.county_id, co.name, sl.rank as livingrank,
+#                (cp.a_mean-cl.tax_"""+tax+""")as professionrank,
+#                cl.tax_"""+tax+""" as wage,
+#                cp.a_mean as amean,
+#                cc.total as crimerank,
+#                (cm.male_"""+marital+""" + cm.female_"""+marital+""") as totalmarital
+#                from counties co
+#                left join countiesliving cl on (co.county_id = cl.county_id)
+#                left join statesliving sl on (co.state_id = sl.state_id)
+#                left join statesprofessions cp on (co.state_id = cp.state_id)
+#                left join statescrime cc on (co.state_id = cc.state_id)
+#                left join countiesmarital cm on (co.county_id =  cm.county_id)
+#                where cp.title = '"""+profession+"""'
+#                and co.state_id ="""+state_id+"""
+#                order by co.county_id"""
+
+#     result = db.session.execute(query)
+#     df1 = DataFrame(result.fetchall())
+#     df1.columns = result.keys()
+#     df = df1
+#     if (professionptn != 'None'):
+#         query = """select s.state_id, p.a_mean as professionptn
+#                    from statesprofessions p
+#                    left join states s on (s.state_id = p.state_id)
+#                    where s.state_id ="""+state_id+""" and p.title = '"""+professionptn+"""'"""
+#         result = db.session.execute(query)
+#         df2 = DataFrame(result.fetchall())
+#         df2.columns = result.keys()
+#         df = pd.merge(df1, df2,
+#                        left_on='state_id',
+#                        right_on='state_id')
+#     else:
+#         df = df1
+
+#     df = rank_dataframe(df, wl, wp, wc, wm)
+
+#     counties_by_state = df.sort_index(by=['rate'], ascending=False).fillna(0).to_dict('records')
+#     print counties_by_state
+#     return counties_by_state
+
+def counties_by_id(state_id, tax):
+    """Return all the counties of the given State"""
+
+    query = """select co.name, co.percapita_income, co.median_household_income,
+               co.population, co.number_households, cl.tax_"""+tax+""" as wage
                from counties co
                left join countiesliving cl on (co.county_id = cl.county_id)
-               left join statesliving sl on (co.state_id = sl.state_id)
-               left join statesprofessions cp on (co.state_id = cp.state_id)
-               left join statescrime cc on (co.state_id = cc.state_id)
-               left join countiesmarital cm on (co.county_id =  cm.county_id)
-               where cp.title = '"""+profession+"""'
-               and co.state_id ="""+state_id+"""
-               order by co.county_id"""
+               where state_id = """ + state_id
 
     result = db.session.execute(query)
-    df1 = DataFrame(result.fetchall())
-    df1.columns = result.keys()
-    df = df1
-    if (professionptn != 'None'):
-        query = """select s.state_id, p.a_mean as professionptn
-                   from statesprofessions p
-                   left join states s on (s.state_id = p.state_id)
-                   where s.state_id ="""+state_id+""" and p.title = '"""+professionptn+"""'"""
-        result = db.session.execute(query)
-        df2 = DataFrame(result.fetchall())
-        df2.columns = result.keys()
-        df = pd.merge(df1, df2,
-                       left_on='state_id',
-                       right_on='state_id')
-    else:
-        df = df1
-
-    df = rank_dataframe(df, wl, wp, wc, wm)
-
-    counties_by_state = df.sort_index(by=['rate'], ascending=False).fillna(0).to_dict('records')
-    print counties_by_state
+    counties = DataFrame(result.fetchall())
+    counties.columns = result.keys()
+    counties_by_state = counties.fillna(0).to_dict('records')
     return counties_by_state
 
 
@@ -206,7 +221,7 @@ def top_chart_states(chart, tax, profession, marital, wl, wp, wc, wm, ntop=3, pr
         crimerank = row['crimerank']
         professionrank = row['professionrank']
         result.append({})
-        print chart
+
         if (chart=="marliv"):
             result[i] = {"key": name,
                          "color": color[i],
@@ -247,9 +262,8 @@ def rank_dataframe(df, wl, wp, wc, wm):
     df['totalmarital'] = df['totalmarital'].map('{:.2f}'.format)
     df['professionrank'] = df['professionrank'].map('{:.2f}'.format)
     df.to_csv('rankdataframe.csv')
-    # print '###########Rank Data Frame ##############'
-    # print df
+
     return df
 
-if __name__ == "__main__":
-    connect_to_db(app)
+# if __name__ == "__main__":
+#     # connect_to_db(app)

@@ -7,7 +7,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from sqlalchemy import func
 from model import connect_to_db, db
-from model import State, County, StatePopulation, CountyPopulation
+from model import State, County
 from model import StateProfession, StateLiving, CountyLiving, StateMarital
 from model import CountyMarital, StateCrime, CountyCrime
 import ranking
@@ -65,28 +65,13 @@ def search_counties():
     """Search the top counties"""
 
     tax = request.args.get("tax")
-    profession = request.args.get("profession")
-    age = request.args.get("age")
-    marital = request.args.get("marital")
-    mstatus = marital + "_" + age
-    wl = int(request.args.get("opcLiving"))
-    wp = int(request.args.get("opcProfession"))
-    wc = int(request.args.get("opcCrime"))
-    wm = int(request.args.get("opcMarital"))
-    professionptn = request.args.get("professionptn")
+
     if (request.args.get("state_id")):
         state_id = request.args.get("state_id")
-        top_counties = ranking.counties_by_id(state_id, tax, profession, mstatus, wl, wp, wc, wm, professionptn.strip())
-    else:
-        top_counties = ranking.get_top_counties(tax, profession, mstatus, wl, wp, wc, wm, professionptn.strip())
+        top_counties = ranking.counties_by_id(state_id, tax)
+    # else:
+    #     # top_counties = ranking.get_top_counties(tax, profession, mstatus, wl, wp, wc, wm, professionptn.strip())
     return jsonify(data=top_counties)
-
-
-@app.route('/map_counties')
-def map_counties():
-    """Show the map by counties"""
-
-    return render_template("counties.html")
 
 
 @app.route('/data/<path:path>')
@@ -190,13 +175,6 @@ def chartsgral_json():
     top_states = ranking.top_chart_states(chart, tax, profession, mstatus, wl, wp, wc, wm, ntop, professionptn.strip())
 
     return jsonify(result=top_states)
-
-
-@app.route('/map_states')
-def map_states():
-    """Show the map by States"""
-
-    return render_template("states.html")
 
 
 if __name__ == "__main__":
