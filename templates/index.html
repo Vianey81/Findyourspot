@@ -4,175 +4,57 @@
 {% endblock %}
 {% block body %}
 
-<!--  <div class="site-wrapper">
-    <div class="site-wrapper-inner">-->
-<!--      <div class="col-xs-12 col-md-4">
-                <h1>Let's Play!</h1>
-                Container of the search 
-                <div id="searchform" class="contaniner">
+<br>
+      <div id="result" class="col-xs-12 col-md-12">
 
-                      <div class="row">
-                        <div class="panel panel-success col-xs-12 col-md-12" style="height: 140px;">
-                          <div class="panel-heading">
-                            <h3 class="panel-title">Cost of Living</h3>
-                          </div>
-                          <div class="panel-body">
-                            <div class="col-xs-12 col-md-12">
-                                  
-                                  <input name="living" type="range" min="0" max="2" style="width:100%;">
-                                  <output class="opcLiving" id="valor" hidden=true>4</output>
-                                  <span id="valueliving">Somewhat Important</span>
-                            </div> 
-
-                                  <label class="control-label col-md-4">Legal Situation:</label>
-
-                                  <div class="col-md-8">
-                                      <select class="form-control" id="tax">
-                                          
-                                        <option value="1ad">Living Alone</option>
-                                        <option value="2ad">Living with a partner</option>
-                                        <option value="22">Living with a partner with children</option>
-                                          
-                                      </select>
-                                  </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="panel panel-info col-xs-12 col-md-12" style="height: 220px;">
-                          <div class="panel-heading">
-                            <h3 class="panel-title">Best Salary</h3>
-                          </div>
-                          <div class="panel-body">
-                            <div class="col-xs-12 col-md-12">
-                                  <input name="profession" type="range" min="0" max="2" style="width:100%;">
-                                  <output class="opcProfession" hidden=true>4</output>
-                                  <span id="valueprofession">Somewhat Important</span>
-                            </div> 
-
-                                  <div class="col-md-12">
-                                      <label class="control-label">Select your profession:</label>
-                                      <select class="selectpicker" data-live-search="true" data-width='330px' id="profession">
-                                          {% for profession in professions %}
-                                              <option value="{{ profession.title }}">{{ profession.title }}</option>
-                                          {% endfor %}
-                                      </select>
-                                  </div>
-                                  <div class="col-md-12">
-                                      <label class="control-label">Select your partner profession:</label>
-                                      <select class="selectpicker" data-live-search="true" data-width='330px' id="professionpartner">
-                                          {% for profession in professions %}
-                                              <option value="{{ profession.title }}">{{ profession.title }}</option>
-                                          {% endfor %}
-                                      </select>
-                                  </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="panel panel-warning col-xs-12 col-md-12" style="height: 100px;">
-                          <div class="panel-heading">
-                            <h3 class="panel-title">Crime</h3>
-                          </div>
-                          <div class="panel-body">
-                            <div class="col-xs-12 col-md-12">
-                                <input name = "crime" type="range" min="0" max="2" style="width:100%;">
-                                <output class="opcCrime" id="valor" hidden=true>4</output>
-                                <span id="valuecrime">Somewhat Important</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        
-                        <div class="panel panel-primary col-xs-12 col-md-12" style="height: 170px;">
-                          <div class="panel-heading">
-                            <h3 class="panel-title">Marital Status & Age</h3>
-                          </div>
-                          <div class="panel-body" >
-                            <div class="col-xs-12 col-md-12">
-                                  <input name="marital" type="range" min="0" max="2" style="width:100%;">
-                                  <output class="opcMarital" id="valor" hidden=true>4</output>
-                                  <span id="valuemarital">Somewhat Important</span>
-                            </div>
-
-                                  <div class="col-xs-12 col-md-6">
-                                      <label class="control-label">Age:</label>
-                                      <select data-placeholder="Choose your Age" class="form-control" id="age">
-                                              <option value="1524">15 - 24 yrs</option>
-                                              <option value="2539">25 - 39 yrs</option>
-                                              <option value="4059">40 - 59 yrs</option>
-                                              <option value="60">60 - 90 yrs</option>
-                                      </select>
-                     
-                                  </div>
-                                  <div class="col-xs-12 col-md-6">
-                                      <label class="control-label">Marital Status</label>
-                                      <select class="form-control" id="marital">                            
-                                              <option value="single">Single</option>
-                                              <option value="married">Married</option>
-                                              <option value="widowed">Widowed</option>
-                                              <option value="divorced">Divorced</option>                          
-                                      </select>
-                                  </div>
-                          </div>
-                        </div>
-                      </div>
-                </div>
-      </div> -->
-
-      <div id="result" class="col-xs-12 col-md-6">
-
+  
                 <!-- Container of the map -->
+
                 <div id = "mapform" class="container">
                     
                 </div>
                  <!-- Show charts when mouse over or mouse click -->
-                 <div class="row">
-                    <div class="col-xs-12 col-md-6">
-                      <h3><span id="nameState"></span></h3>
-                      <pre id="output" hidden=true>
-
-                      </pre>
-                    </div>
-                    
-                 </div>
+                 
                 {% raw %}
                 <div id="chartsbystate" class="container" hidden=true>
                   <div class="row" >
+                        <div class="col-xs-12 col-md-12">
+                          <button type="button" class="btn btn-success" id="showgralbtn" onclick="showChartGral()" >Back to Rank States</button>
+                        </div>
                     <div class="board"> 
                       <div class="board-inner">
-                        <ul class="nav nav-tabs" id="myTab">
+                        <ul class="nav nav-tabs" >
                         <div class="liner"></div>
                           <li class="active">
-                          <a href="#general" data-toggle="tab" title="general">
+                          <a  href="#general"  data-toggle="tab" title="general">
                               <span class="round-tabs one">
                                 <i class="glyphicon glyphicon-home"></i>
                               </span> 
                           </a></li>
 
-                          <li><a href="#charts" data-toggle="tab" title="charts">
+                          <li><a  href="#charts" data-toggle="tab" title="charts">
                              <span class="round-tabs two">
-                                 <i class="glyphicon glyphicon-user"></i>
+                                 <i class="glyphicon glyphicon-signal"></i>
                              </span> 
                           </a></li>
-                         <li><a href="#images" data-toggle="tab" title="images">
+                         <li><a  href="#images" data-toggle="tab" title="images">
                              <span class="round-tabs three">
-                                  <i class="glyphicon glyphicon-gift"></i>
+                                  <i class="glyphicon glyphicon-picture"></i>
                              </span> </a>
                              </li>
                      
                         </ul></div>
 
+
                      <div class="tab-content">
-                          <div class="tab-pane fade in active" id="general">
-                           
+                          <div class="tab-pane fade in active" ng-controller="SecondCtrl" id="general">
+                            <button id="btngral" ng-click="onclickgral()" hidden=true></button>
+                            <h3 class="head text-center">General Statistics  <span id="statename"style="color:#f48260;"></span></h3>
+                            <div my-customer class="col-xs-12 col-md-10 col-md-offset-2"></div>
                           </div>
-                          <div class="tab-pane fade" id="charts">
-                              
+
+                          <div class="tab-pane fade" ng-controller="MainCtrl" id="charts">
+                             
                                 <div class="row" >
                                 <div class="col-lg-4">
                                     <button id="crimebtn" ng-click="onclickcrime()" hidden=true></button>
@@ -192,15 +74,72 @@
                                 </div>  
                           </div>
                           <div class="tab-pane fade" id="images">
-                            
+                             <button id="btnimages" onclick="getImagesbyState();" hidden=true></button>
+                             <h3 class="head text-center">Gallery<span style="color:#f48260;">♥</span></h3>
+                              <div class='row'>
+                                  <div class='col-md-10 col-md-offset-1'>
+                                    <div class="carousel slide media-carousel" id="media">
+                                      <div class="carousel-inner">
+                                        <div class="item  active">
+                                          <div class="row">
+                                            <div class="col-md-4">
+                                              <a class="thumbnail" href="#"><img alt="" id = "Image0" src="http://placehold.it/150x150"></a>
+                                            </div>          
+                                            <div class="col-md-4">
+                                              <a class="thumbnail" href="#"><img alt="" id = "Image1" src="http://placehold.it/150x150"></a>
+                                            </div>
+                                            <div class="col-md-4">
+                                              <a class="thumbnail" href="#"><img alt="" id = "Image2" src="http://placehold.it/150x150"></a>
+                                            </div>        
+                                          </div>
+                                        </div>
+                                        <div class="item">
+                                          <div class="row">
+                                            <div class="col-md-4">
+                                              <a class="thumbnail" href="#"><img alt="" id = "Image3" src="http://placehold.it/150x150"></a>
+                                            </div>          
+                                            <div class="col-md-4">
+                                              <a class="thumbnail" href="#"><img alt="" id = "Image4" src="http://placehold.it/150x150"></a>
+                                            </div>
+                                            <div class="col-md-4">
+                                              <a class="thumbnail" href="#"><img alt="" id = "Image5" src="http://placehold.it/150x150"></a>
+                                            </div>        
+                                          </div>
+                                        </div>
+                                        <div class="item">
+                                          <div class="row">
+                                            <div class="col-md-4">
+                                              <a class="thumbnail" href="#"><img alt="" id = "Image6" src="http://placehold.it/150x150"></a>
+                                            </div>          
+                                            <div class="col-md-4">
+                                              <a class="thumbnail" href="#"><img alt="" id = "Image7" src="http://placehold.it/150x150"></a>
+                                            </div>
+                                            <div class="col-md-4">
+                                              <a class="thumbnail" href="#"><img alt="" id = "Image8" src="http://placehold.it/150x150"></a>
+                                            </div>      
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <a data-slide="prev" href="#media" class="left carousel-control">‹</a>
+                                      <a data-slide="next" href="#media" class="right carousel-control">›</a>
+                                    </div>                          
+                                  </div>
+                                </div>
                           </div>
                     </div>
                   </div>
                 </div>
               </div>
-                <div id="chartsgral" class="container">
+                <div id="chartsgral" ng-controller="MainCtrl" class="container">
                   <div class="row">
-                      <div class="col-xs-12 col-md-4">
+                    <div class="col-xs-12 col-md-12">
+                      <h3><span id="nameState">TOP STATES</span></h3>
+          
+                    </div>
+                    
+                 </div>
+                  <div class="row">
+                      <div class="col-xs-12 col-md-8">
                         <h5>Show the TOP: </h5>
                         <select class="form-control" id="ntop">
                                           
@@ -228,8 +167,8 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <p id="ptable">All the counties</p>
+                                <div class="panel-heading" style="background-color:#E33D51;">
+                                    <p id="ptable" style="font-size:24px; color:#E1eaed;">All the counties</p>
                                 </div>
                                 <div class="panel-body">
                                     <div >
@@ -237,11 +176,12 @@
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
-                                                    <th>Living Wage</th>
-                                                    <th>Per capita Income</th>
+                                                    <th>Living Wage <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="A wage that is high enough to maintain a normal standard of living."></i></th>
+                                                    <th>Per Capita Income <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="Average income earned per person in a given area."></i></th>
+                                                    <th>Discretionary Income <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="Amount of an individual's income that is left for spending, investing or saving after taxes and personal necessities ."></i></th>
                                                     <th>Median Household Inc.</th>
                                                     <th>Population</th>
-                                                    <th>Number of Households</th>                                                    
+                                                                                                        
                                                 </tr>
                                             </thead>
                                             
@@ -335,12 +275,20 @@
                 { "data": "name" },
                 { "data": "wage" },
                 { "data": "percapita_income" },
+                { "data": "discretionary_income" }, 
                 { "data": "median_household_income" },
-                { "data": "population" },
-                { "data": "number_households" }
+                { "data": "population" }
                 
                 ],
-                "order": [[ 1, "desc" ]]
+                "order": [[ 1, "desc" ]],
+                "aoColumnDefs": [ {
+                "aTargets": [3],
+                "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                  if ( sData < 0 ) {
+                    $(nTd).css('color', 'red')
+                  }
+                }
+            } ]
             } );
 
     } );
@@ -354,7 +302,6 @@ $(function(){
   $('#slide-submenu').on('click',function() {             
         $(this).closest('.list-group').fadeOut('slide',function(){
           $('.mini-submenu').fadeIn();  
-          $('#result').removeClass('col-xs-12 col-md-6').addClass('col-xs-12 col-md-11')
         });
         
       });
@@ -362,9 +309,16 @@ $(function(){
   $('.mini-submenu').on('click',function(){   
         $(this).next('.list-group').toggle('slide');
         $('.mini-submenu').hide();
-        $('#result').removeClass('col-xs-12 col-md-11').addClass('col-xs-12 col-md-6')
   })
 })
+
+$(document).ready(function() {
+  $('#media').carousel({
+    pause: false,
+    interval: false,
+  });
+});
+
 
 
 </script>

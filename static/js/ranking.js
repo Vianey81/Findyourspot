@@ -48,8 +48,14 @@ function showDataRank() {
                                         "totalmarital":data[i].totalmarital,
                                         "livingrank":data[i].livingrank,
                                         "professionrank": data[i].professionrank,
+                                        "professionptn": data[i].professionptn,
+                                        "professionmean": data[i].a_mean,
                                         "crimerank":data[i].crimerank,
-                                        "rate":data[i].rate};  
+                                        "percapita_income":data[i].percapita_income,
+                                        "median_household_income":data[i].median_household_income,
+                                        "population":data[i].population,
+                                        "number_households":data[i].number_households,
+                                        "rate":data[i].rate};
         }
         });
 
@@ -65,7 +71,7 @@ function init() {
 
 function setMap() {
       // set the Map
-      width = 960; 
+      width = 1140; 
       height = 580;  // map width and height, matches 
 
 
@@ -126,12 +132,13 @@ function loadNewData(){
     ]);
     $('#chgChartCP').trigger("click");
     $('#chgChartML').trigger("click");
-    $('#nameState').html("TOP States");
-    $('#chartsgral').attr("hidden", false);
-    $('#chartsbystate').attr("hidden", true);
+    showChartGral();
 
 }
-
+function showChartGral(){
+    $('#chartsgral').attr("hidden",   false);
+    $('#chartsbystate').attr("hidden", true);
+}
 function processData(error,us,matches) {
   // function accepts any errors from the queue function as first argument, then
   // each data object in the order of chained defer() methods above              
@@ -144,6 +151,20 @@ function processData(error,us,matches) {
 
 }
 
+function changeColorState(old_state, new_state){
+  var color = "";
+
+  d3.selectAll('#code_'+old_state).transition()  //select all the countries and prepare for a transition to new values
+      .duration(500)  // give it a smooth time period for the transition
+      .style("fill", function(){
+        return getColor(rateById[old_state]);
+      });
+
+  d3.selectAll('#code_'+new_state).transition()  //select all the countries and prepare for a transition to new values
+      .duration(500)  // give it a smooth time period for the transition
+      .style("fill", "#494949");
+}
+
 function drawMap(us) {
 
     svg.selectAll(".states")   // select country objects (which don't exist yet)
@@ -152,6 +173,7 @@ function drawMap(us) {
       .attr("class", "states") // give them a class for styling and access later
       .attr("id", function(d) { return "code_" + d.id; }, true)
       .attr("d", path)
+      .style("fill", "#889FA6")
       .on("mousemove", function(d,i) {
           var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); } );
           tooltip.classed("hidden", false)
@@ -163,6 +185,8 @@ function drawMap(us) {
       })
       // When a feature is clicked, show the details of it.
       .on('click', function(d){
+            console.log(state_id, d.id);
+            changeColorState(state_id, d.id);
             showDetails(d.id);
       });
           
@@ -231,6 +255,7 @@ function getColor(value) {
 function showDetails(id) {
   // Draw the table with the Counties of the selected State, Draw the charts By State
   var d = DataById[id];
+
   state_id = id;
   getValuesFrm();
   urlbystate = "";
@@ -241,19 +266,54 @@ function showDetails(id) {
 
   table.ajax.url(urlbystate).load();
   $('#ptable').html("Counties of "+DataById[state_id].name);
-  $('#nameState').html(DataById[state_id].name);
+  $('#statename').html(DataById[state_id].name);
+  // $('#nameState').html(DataById[state_id].name);
   $('#crimebtn').trigger("click");
   $('#maritalbtn').trigger("click");
   $('#agebtn').trigger("click");
+  $('#btngral').trigger("click");
+  $('#btnimages').trigger("click");
   $('#chartsgral').attr("hidden", true);
   $('#chartsbystate').attr("hidden", false);
   
 }
-    
+
+function getDatabyState(){
+
+  result = {
+    name: DataById[state_id].name,
+    population: DataById[state_id].population,
+    livingrank: DataById[state_id].livingrank,
+    median_household_income: DataById[state_id].median_household_income,
+    percapita_income: DataById[state_id].percapita_income,
+    professionmean: DataById[state_id].professionmean,
+    professionptn: DataById[state_id].professionptn,
+    crimerank: DataById[state_id].crimerank,
+    totalmarital: DataById[state_id].totalmarital,
+    rate: DataById[state_id].rate
+  };
+
+  return result;
+}
+
+function getImagesbyState(){
+
+  var url = "https://www.googleapis.com/customsearch/v1?key=AIzaSyBm_pr_2ahSkA3tTL0aQ3iUAM7Jf5lKd0A&cx=013301556953799793067:3i_a3gommfk&q="+DataById[state_id].name+"%20attractions&imgSize=medium&fileType=png&searchType=image";
+
+  $.get(url, function(results){
+            var data = results['items'];
+            for (i=0; i< data.length; i++) {
+                $('#Image'+i).attr('src', data[i].link);
+        }
+        });
+
+  return true;
+} 
+
+
 var app = angular.module('spot', ['nvd3']);
 
 app.controller('MainCtrl', function($scope) {
-        
 
         $scope.optionsbystate = {
             chart: {
@@ -268,9 +328,6 @@ app.controller('MainCtrl', function($scope) {
                 duration: 1500,
             }
         };
-
-        
-  
 
         $scope.datacrime = [];
         $scope.onclickcrime = function(){
@@ -355,7 +412,6 @@ app.controller('MainCtrl', function($scope) {
           getValuesFrm();
           urlcripro = "/chartsgral.json?chart=cripro&tax="+tax+"&profession="+profession+"&professionptn="+professionptn+"&age="+age+"&marital="+marital+"&ntop="+ntop+"&opcLiving="+wl+"&opcMarital="+wm+"&opcCrime="+wc+"&opcProfession="+wp;
         setTimeout(function(){
-
             $scope.data = getData(urlcripro);   
             $scope.$apply();
         }, 0);
@@ -365,4 +421,41 @@ app.controller('MainCtrl', function($scope) {
 
 
 });
+
+app.controller('SecondCtrl', function($scope)
+        {
+          // Initialize the model variables
+        $scope.graldata = [];
+        $scope.onclickgral = function(){
+        setTimeout(function(){
+            $scope.graldata = getDatabyState();
+            $scope.$apply();
+        }, 0);
+        };
+
+
+        }
+);
+
+
+
+app.directive('myCustomer', function() {
+
+
+  tmp = "<p><i class='glyphicon glyphicon-user'></i><strong> Population: </strong> {{ graldata.population | number}}";
+  tmp += "<p><i class='fa fa-area-chart'></i><strong> Rank Costo of Living: </strong> {{ graldata.livingrank }}";
+  tmp += "<p><i class='glyphicon glyphicon-usd'></i><strong> Median Household Income: </strong> {{ graldata.median_household_income | currency:'USD$ '}}";
+  tmp += "<br/><i class='glyphicon glyphicon-usd'></i><strong> Percapita Income: </strong> {{ graldata.percapita_income | currency:'USD$ '}}";
+  tmp += "<br /><i class='glyphicon glyphicon-usd'></i><strong> Avg. Salary Personal Profession  : </strong> {{ graldata.professionmean | currency:'USD$ '}}</p>";
+  tmp += "<p><i class='glyphicon glyphicon-usd'></i><strong> Avg. Salary Partner Profession : </strong> {{ graldata.professionptn | currency:'USD$ ' }}";  
+  tmp += "<p><i class='fa fa-area-chart'></i><strong> Crime per 100,000 habitants: </strong> {{ graldata.crimerank | number}}";
+  tmp += "<p><i class='fa fa-percent'></i><strong> Percentage of same demographic: </strong> {{ graldata.totalmarital }}";
+  tmp += "<p><i class='fa fa-area-chart'></i><strong> Rate of the State: </strong> {{ graldata.rate}}";
+
+  return {
+    template: tmp
+  };
+}
+);
+
 

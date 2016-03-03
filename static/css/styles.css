@@ -87,6 +87,25 @@ button {
     background-color: black;
 }
 
+.list-group-item{
+    border: 0px !important;
+    background-color: transparent !important;
+
+}
+.list-group-title{
+    font-size: 16px !important;
+}
+/* color of the main search frm */
+.list-title{
+    font-size: 28px !important;
+    text-align: left;
+    color: #E1eaed;
+    background-color: #E33D51 !important;
+}
+.navbar-title{
+    font-size: 60px !important;
+    text-align: left;
+}
 .clear {
     clear: both;
 }
@@ -221,24 +240,25 @@ button {
     fill: steelblue;
 }
 
-
+/* panel Gral
 /* written by riliwan balogun http://www.facebook.com/riliwan.rabo*/
 .board{
-    width: 75%;
-margin: 60px auto;
-height: 500px;
-background: #fff;
-/*box-shadow: 10px 10px #ccc,-10px 20px #ddd;*/
+    width: 95%;
+    margin: 60px auto;
+    height: 500px;
+    background: #fff;
+    /*box-shadow: 10px 10px #ccc,-10px 20px #ddd;*/
 }
 .board .nav-tabs {
     position: relative;
     border-bottom: 0;
-    width: 80%;
-    margin: 40px auto;
+    width: 95%;
+    margin: -100px ;
     margin-bottom: 0;
     box-sizing: border-box;
 
 }
+
 
 .board > div.board-inner{
     background-size: 30%;
@@ -254,7 +274,7 @@ p.narrow{
     height: 2px;
     background: #ddd;
     position: absolute;
-    width: 80%;
+    width: 120%;
     margin: 0 auto;
     left: 0;
     right: 0;
@@ -265,27 +285,36 @@ p.narrow{
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
     color: #555555;
     cursor: default;
+
     /* background-color: #ffffff; */
     border: 0;
     border-bottom-color: transparent;
+
 }
+
+
 
 span.round-tabs{
     width: 70px;
     height: 70px;
     line-height: 70px;
-    display: inline-block;
-    border-radius: 100px;
+    display: inline-block !important;
+    border-radius: 100px !important;
     background: white;
-    z-index: 2;
-    position: absolute;
-    left: 0;
-    text-align: center;
-    font-size: 25px;
+    z-index: 2 !important;
+    position: absolute !important;
+    left: 0 !important;
+    text-align: center !important;
+    font-size: 45px;
 }
 
 span.round-tabs.one{
     color: rgb(34, 194, 34);border: 2px solid rgb(34, 194, 34);
+
+
+}
+.mytab{
+    margin-left: -200px;
 }
 
 li.active span.round-tabs.one{
@@ -342,7 +371,8 @@ li.active span.round-tabs.five{
     width: 20%;
 }
 .nav-tabs {
-    display: flex;
+    display: flex !important;
+    /*display: block;*/
 }
 /*li.active:before {
     content: " ";
@@ -392,10 +422,11 @@ li.active:after {
 }
 
 .tab-content{
+        font-size: 18px;
 }
 .tab-pane{
    position: relative;
-padding-top: 50px;
+    padding-top: 0px;
 }
 .tab-content .head{
     font-family: 'Roboto Condensed', sans-serif;
@@ -418,7 +449,7 @@ padding-top: 50px;
 
 
 
-@media( max-width : 585px ){
+/*@media( max-width : 585px ){
     
     .board {
 width: 90%;
@@ -448,4 +479,88 @@ left: 35%;
 .btn-outline-rounded {
     padding:12px 20px;
     }
+}*/
+
+/* carousel */
+.media-carousel 
+{
+  margin-bottom: 0;
+  padding: 0 40px 30px 40px;
+  margin-top: 30px;
+}
+/* Previous button  */
+.media-carousel .carousel-control.left 
+{
+  left: -12px;
+  background-image: none;
+  background: none repeat scroll 0 0 #222222;
+  border: 4px solid #FFFFFF;
+  border-radius: 23px 23px 23px 23px;
+  height: 40px;
+  width : 40px;
+  margin-top: 30px
+}
+/* Next button  */
+.media-carousel .carousel-control.right 
+{
+  right: -12px !important;
+  background-image: none;
+  background: none repeat scroll 0 0 #222222;
+  border: 4px solid #FFFFFF;
+  border-radius: 23px 23px 23px 23px;
+  height: 40px;
+  width : 40px;
+  margin-top: 30px
+}
+/* Changes the position of the indicators */
+.media-carousel .carousel-indicators 
+{
+  right: 50%;
+  top: auto;
+  bottom: 0px;
+  margin-right: -19px;
+}
+/* Changes the colour of the indicators */
+.media-carousel .carousel-indicators li 
+{
+  background: #c0c0c0;
+}
+.media-carousel .carousel-indicators .active 
+{
+  background: #333333;
+}
+.media-carousel img
+{
+  width: 450px;
+  height: 250px !important;
+}
+
+/* End carousel */
+/* Modal Window*/
+.modal {
+}
+.modal-backdrop {
+  z-index: 0 !important;
+}
+.vertical-alignment-helper {
+    display:table;
+    height: 100%;
+    width: 100%;
+}
+.vertical-align-center {
+     /*To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+}
+.modal-header{
+    background-color: #70C1B3;
+}
+.modal-content {
+     /*Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+    width:inherit;
+    height:inherit;
+
+     /*To center horizontally */
+   margin: 0 auto;
+    display: block;
 }
