@@ -210,4 +210,8 @@ def rank_dataframe(df, wl, wp, wc, wm):
     return df
 
 # if __name__ == "__main__":
-#     # connect_to_db(app)
+#     connect_to_db(app)
+
+#     import doctest
+
+#     doctest.testmod()
