@@ -442,10 +442,11 @@ app.controller('SecondCtrl', function($scope)
 app.directive('myCustomer', function() {
 
 
-  tmp = "<p><i class='glyphicon glyphicon-user'></i><strong> Population: </strong> {{ graldata.population | number}}";
-  tmp += "<p><i class='fa fa-area-chart'></i><strong> Rank Costo of Living: </strong> {{ graldata.livingrank }}";
+  
+  tmp = "<p><i class='fa fa-area-chart'></i><strong> Rank Costo of Living: </strong> {{ graldata.livingrank }}";
   tmp += "<p><i class='glyphicon glyphicon-usd'></i><strong> Median Household Income: </strong> {{ graldata.median_household_income | currency:'USD$ '}}";
   tmp += "<br/><i class='glyphicon glyphicon-usd'></i><strong> Percapita Income: </strong> {{ graldata.percapita_income | currency:'USD$ '}}";
+  tmp += "<p><i class='glyphicon glyphicon-user'></i><strong> Num. of Jobs in the selected profession (per 1,000): </strong> {{ graldata.jobs_1000 | number}}";
   tmp += "<br /><i class='glyphicon glyphicon-usd'></i><strong> Avg. Salary Personal Profession  : </strong> {{ graldata.professionmean | currency:'USD$ '}}</p>";
   tmp += "<p><i class='glyphicon glyphicon-usd'></i><strong> Avg. Salary Partner Profession : </strong> {{ graldata.professionptn | currency:'USD$ ' }}";  
   tmp += "<p><i class='fa fa-area-chart'></i><strong> Crime per 100,000 habitants: </strong> {{ graldata.crimerank | number}}";

@@ -51,7 +51,7 @@ def get_top_counties(tax, profession, marital, wl, wp, wc, wm, professionptn='No
 
     df = rank_dataframe(df, wl, wp, wc, wm)
 
-    rank_counties = df.sort_index(by=['rankTotal'], ascending=False).fillna(0).to_dict('records')
+    rank_counties = df.sort_values(by=['rankTotal'], ascending=False).fillna(0).to_dict('records')
 
     return rank_counties
 
@@ -113,7 +113,8 @@ def get_top_states(tax, profession, marital, wl, wp, wc, wm, professionptn='None
 
     df = rank_dataframe(df, wl, wp, wc, wm)
 
-    rank_states = df.sort_index(by=['rate'], ascending=False).fillna(0).to_dict('records')
+    # rank_states = df.sort_index(by=['rate'], ascending=False).fillna(0).to_dict('records')
+    rank_states = df.sort_values(by=['rate'], ascending=False).fillna(0).to_dict('records')
 
     return rank_states
 
@@ -153,7 +154,7 @@ def top_chart_states(chart, tax, profession, marital, wl, wp, wc, wm, ntop=3, pr
 
     df = rank_dataframe(df, wl, wp, wc, wm)
 
-    rank_states = df.sort_index(by=['rate'], ascending=False).fillna(0).head(ntop)
+    rank_states = df.sort_values(by=['rate'], ascending=False).fillna(0).head(ntop)
 
     color = ["#F4442E", "#FC9E4F", "#EDD382", "#F2F3AE", "#A48DA7", "#B33F62", "#7B1E7A", "#49A078", "#9CC5A1", "#216869"]
     result = []
@@ -189,7 +190,8 @@ def top_chart_states(chart, tax, profession, marital, wl, wp, wc, wm, ntop=3, pr
 def rank_dataframe(df, wl, wp, wc, wm):
     """Calculate the rank and return a dataframe"""
 
-    df[['totalmarital', 'professionrank', 'crimerank']].astype(float).fillna(0)
+    # df[['totalmarital', 'professionrank', 'crimerank', 'totalmarital']].astype(float).fillna(0)
+    df[['totalmarital', 'professionrank', 'crimerank', 'totalmarital']].fillna(0)
     if ('professionptn' in df):
         df['personalprofession'] = df['professionrank']
         df['professionrank'] = df['personalprofession'] + df['professionptn']
