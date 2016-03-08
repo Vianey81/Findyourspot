@@ -180,7 +180,7 @@ def top_chart_states(chart, tax, profession, marital, wl, wp, wc, wm, ntop=3, pr
                          "color": color[i],
                          "values": [{"label": "Crime",
                                     "value": crimerank},
-                                    {"label": "Profession",
+                                    {"label": "Prof.",
                                     "value": professionrank}
                                     ]}                    
         i += 1

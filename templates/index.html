@@ -4,9 +4,15 @@
 {% endblock %}
 {% block body %}
 
-<br>
-      <div id="result" class="col-xs-12 col-md-12">
 
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                      <span class="myFont" >Click on any State to know more about it</span>
+                    </div>   
+                 </div>
+      <hr>
+      <div id="result" class="col-xs-12 col-md-12">
+                
   
                 <!-- Container of the map -->
 
@@ -130,23 +136,24 @@
                   </div>
                 </div>
               </div>
-                <div id="chartsgral" ng-controller="MainCtrl" class="container">
+                <div id="chartsgral" ng-controller="MainCtrl" class="container" hidden=true>
                   <div class="row">
                     <div class="col-xs-12 col-md-12">
-                      <h3><span id="nameState">TOP STATES</span></h3>
+                      <span class="myFont" id="nameState">The best States for you based on your selection</span>
           
                     </div>
                     
                  </div>
+                 <hr>
                   <div class="row">
-                      <div class="col-xs-12 col-md-8">
-                        <h5>Show the TOP: </h5>
-                        <select class="form-control" id="ntop">
-                                          
+                      <div class="col-xs-12 col-md-2">
+                          <h5>Show the TOP: </h5>
+                      </div>
+                      <div class="col-xs-12 col-md-6">
+                        <select class="form-control" id="ntop">           
                               <option value="3">3 States</option>
                               <option value="5">5 States</option>
-                              <option value="10">10 States</option>
-                                          
+                              <option value="10">10 States</option>           
                         </select>
                       </div>
                     </div>
@@ -168,7 +175,7 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading" style="background-color:#E33D51;">
-                                    <p id="ptable" style="font-size:24px; color:#E1eaed;">All the counties</p>
+                                    <p id="ptable" class= "myFont" style="color:#E1eaed;">All the counties</p>
                                 </div>
                                 <div class="panel-body">
                                     <div >

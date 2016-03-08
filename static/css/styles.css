@@ -1,4 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
+@import url(https://fonts.googleapis.com/css?family=Oleo+Script:400,700);
+@import url(https://fonts.googleapis.com/css?family=Architects+Daughter);
 
 body {
     font-family: "helvetica";
@@ -19,6 +21,18 @@ button {
     cursor: pointer;
 }
 
+.navbar-title{
+    font-family: 'Oleo Script', sans-serif;
+    font-size: 72px;
+    padding-bottom: 5px;
+
+}
+.myFont{
+    font-family: 'Architects Daughter', sans-serif;
+    font-size: 28px;
+    text-align: left;
+
+}
 .box {
     width: 200px;
     height: 200px;
@@ -105,13 +119,14 @@ button {
 .navbar-title{
     font-size: 60px !important;
     text-align: left;
+
 }
 .clear {
     clear: both;
 }
 
 .selected {
-    background-color: #f08080;
+    /*background-color: #f08080;*/
 }
 
 .control-group {
@@ -247,7 +262,7 @@ button {
     margin: 60px auto;
     height: 500px;
     background: #fff;
-    /*box-shadow: 10px 10px #ccc,-10px 20px #ddd;*/
+    box-shadow: 10px 10px #ccc,-10px 20px #ddd;
 }
 .board .nav-tabs {
     position: relative;
