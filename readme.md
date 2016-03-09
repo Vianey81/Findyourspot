@@ -1,4 +1,4 @@
-# Spot Finder
+<img width="340" alt="screen shot 2016-03-08 at 9 01 58 pm" src="https://cloud.githubusercontent.com/assets/8810284/13626180/6da78a06-e574-11e5-9777-473092b204b1.png">
 
 Have you ever thought about moving to another State?. Do you wish you could find a web application that helps you to make that decision?
 If you answer is yes...Spot Finder is the right tool for you.
@@ -7,14 +7,16 @@ Spot Finder will help you choose the best State for you to live in based on your
 
 ### Main Page
 
-> The First Step is set up your preferences.
-> There are four main preferences to pick.
+> The First Step is to select your preferences.
+> There are four main preferences to select.
 > Move rigth to left the selectors to set your profile.
-> And fill all the fields, unless you select 'Not Important'.
+> And fill all the fields.
 > The option for each preference are:
 * Not Important: You don't really care about this and the search should exclude it from the calculations.
 * Somewhat Important: You care enough about this.
 * Must Have: You really care about it and you want to live in a State that has the best rank in this.
+
+> Everytime you change something in the Box of preferences, the map and the charts will change. 
 
 ![searchspotf](https://cloud.githubusercontent.com/assets/8810284/13618575/b7d19f8a-e539-11e5-9b85-34bc0f05f61c.gif)
 
@@ -49,7 +51,10 @@ and integrate systems more effectively
 * [D3] - JavaScript library for manipulating documents based on data
 * [NVD3] - Re-usable charts for d3.js
 
+### Rank Algorithm
 
+> The data comes from diferent sources (check 'References' for more information), The algorithm to rank the states follows the next steps:
+* Query all the states order by cost of living from the 
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
