@@ -118,7 +118,7 @@ function loadData() {
 
 queue()   // queue function loads all external data files 
     .defer(d3.json, "data/us.json")  // load geometries by state
-    .defer(d3.tsv, "https://s3-us-west-2.amazonaws.com/rankresults/rankresults.tsv")  // and associated data in tsv file
+    .defer(d3.tsv, "data/rankresults.tsv")  // and associated data in tsv file
     .await(processData);
 
 }
