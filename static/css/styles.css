@@ -389,18 +389,7 @@ li.active span.round-tabs.five{
     display: flex !important;
     /*display: block;*/
 }
-/*li.active:before {
-    content: " ";
-    position: absolute;
-    left: 45%;
-    opacity:0;
-    margin: 0 auto;
-    bottom: -2px;
-    border: 10px solid transparent;
-    border-bottom-color: #fff;
-    z-index: 1;
-    transition:0.2s ease-in-out;
-}*/
+
 li:after {
     content: " ";
     position: absolute;
@@ -464,7 +453,7 @@ li.active:after {
 
 
 
-/*@media( max-width : 585px ){
+@media( max-width : 585px ){
     
     .board {
 width: 90%;
@@ -494,7 +483,7 @@ left: 35%;
 .btn-outline-rounded {
     padding:12px 20px;
     }
-}*/
+}
 
 /* carousel */
 .media-carousel 

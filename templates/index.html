@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-    <title>Main Page</title>
+    <title>Spot Finder</title>
 {% endblock %}
 {% block body %}
 
@@ -62,17 +62,17 @@
                           <div class="tab-pane fade" ng-controller="MainCtrl" id="charts">
                              
                                 <div class="row" >
-                                <div class="col-lg-4">
+                                <div class="col-xs-12 col-lg-4">
                                     <button id="crimebtn" ng-click="onclickcrime()" hidden=true></button>
                                     <h3>Crime by State</h3>
                                     <nvd3 options="optionsbystate" data="datacrime"></nvd3>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-xs-12 col-lg-4">
                                     <button id="maritalbtn" ng-click="onclickmarital()" hidden=true></button>
                                     <h3>Marital Status %</h3>
                                     <nvd3 options="optionsbystate" data="datamarital">Marital</nvd3>
                                </div>
-                                <div class="col-lg-4">
+                                <div class="col-xs-12 col-lg-4">
                                     <button id="agebtn" ng-click="onclickage()" hidden=true></button>
                                     <h3>Population by Age %</h3>
                                     <nvd3 options="optionsbystate" data="dataage">Age</nvd3>
@@ -146,10 +146,10 @@
                  </div>
                  <hr>
                   <div class="row">
-                      <div class="col-xs-12 col-md-2">
+                      <div class="col-xs-4 col-md-2">
                           <h5>Show the TOP: </h5>
                       </div>
-                      <div class="col-xs-12 col-md-6">
+                      <div class="col-xs-8 col-md-6">
                         <select class="form-control" id="ntop">           
                               <option value="3">3 States</option>
                               <option value="5">5 States</option>
@@ -158,11 +158,11 @@
                       </div>
                     </div>
                   <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-xs-12 col-lg-6">
                         <button id="chgChartCP" ng-click="onclickdata()" hidden=true></button>
                         <nvd3 options="optionsgral" data="data"></nvd3>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-xs-12 col-lg-6">
                         <button id="chgChartML" ng-click="onclickdata2()" hidden=true></button>
                         <nvd3 options="optionsgral" data="data2"></nvd3>
                     </div>
@@ -172,7 +172,7 @@
                 <!-- Container of the Data Table -->
                 <div id="infoform" class="container" >
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-xs-12 col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading" style="background-color:#E33D51;">
                                     <p id="ptable" class= "myFont" style="color:#E1eaed;">All the counties</p>

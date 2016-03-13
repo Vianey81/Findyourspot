@@ -154,24 +154,24 @@ function processData(error,us,matches) {
 function changeColorState(old_state, new_state){
   var color = "";
 
-  d3.selectAll('#code_'+old_state).transition()  //select all the countries and prepare for a transition to new values
+  d3.selectAll('#code_'+old_state).transition()  //select old state and prepare for a transition to green
       .duration(500)  // give it a smooth time period for the transition
       .style("fill", function(){
         return getColor(rateById[old_state]);
       });
 
-  d3.selectAll('#code_'+new_state).transition()  //select all the countries and prepare for a transition to new values
+  d3.selectAll('#code_'+new_state).transition()  //select new state and prepare for a transition to dark gray
       .duration(500)  // give it a smooth time period for the transition
       .style("fill", "#494949");
 }
 
 function drawMap(us) {
 
-    svg.selectAll(".states")   // select country objects (which don't exist yet)
+    svg.selectAll(".states")   // select states objects (which don't exist yet)
       .data(topojson.feature(us, us.objects.states).features)
       .enter().append("path") // prepare data to be appended to paths
       .attr("class", "states") // give them a class for styling and access later
-      .attr("id", function(d) { return "code_" + d.id; }, true)
+      .attr("id", function(d) { return "code_" + d.id; }, true) // set a code_id to each State
       .attr("d", path)
       .style("fill", "#889FA6")
       .on("mousemove", function(d,i) {
@@ -183,9 +183,8 @@ function drawMap(us) {
       .on("mouseout",  function(d,i) {
         tooltip.classed("hidden", true);
       })
-      // When a feature is clicked, show the details of it.
+      // When a State is clicked, show the details of it and change its color.
       .on('click', function(d){
-            console.log(state_id, d.id);
             changeColorState(state_id, d.id);
             showDetails(d.id);
       });
@@ -214,14 +213,14 @@ function move() {
   zoom.translate(t);
   g.attr("transform", "translate(" + t + ")scale(" + s + ")");
 
-  //adjust the country hover stroke width based on zoom level
+  //adjust the State hover stroke width based on zoom level
   d3.selectAll(".states").style("stroke-width", 1.5 / s);
 
 }
 
 function sequenceMap() {
     // make the transition everytime the data in the map changes
-    d3.selectAll('.states').transition()  //select all the countries and prepare for a transition to new values
+    d3.selectAll('.states').transition()  //select all the states and prepare for a transition to new values
       .duration(1250)  // give it a smooth time period for the transition
       .style("fill", function (d) {
             return getColor(rateById[d.id]); // <-C
@@ -230,7 +229,7 @@ function sequenceMap() {
 }
 
 function getColor(value) {
-  // return a color depending on the value passed
+  // return a color depending on the value(rate) passed
   var color = "white";
  
   if (value >= 1 && value<= 10){
@@ -315,6 +314,8 @@ var app = angular.module('spot', ['nvd3']);
 
 app.controller('MainCtrl', function($scope) {
 
+      // Set the option for the Pie Charts by State.
+
         $scope.optionsbystate = {
             chart: {
                 type: 'pieChart',
@@ -328,7 +329,7 @@ app.controller('MainCtrl', function($scope) {
                 duration: 1500,
             }
         };
-
+        // Make a call to the server and set the data for the Crime Chart.
         $scope.datacrime = [];
         $scope.onclickcrime = function(){
            $scope.datacrime = [];
@@ -337,7 +338,7 @@ app.controller('MainCtrl', function($scope) {
                 $scope.$apply();
             }, 0);
         };
-        
+        // Make a call to the server and set the data for the Marital Chart.
         $scope.datamarital = [];
         $scope.onclickmarital = function(){
            $scope.datamarital = [];
@@ -346,7 +347,7 @@ app.controller('MainCtrl', function($scope) {
                 $scope.$apply();
             }, 0);
         };
-
+        // Make a call to the server and set the data for the Age Chart.
         $scope.dataage = [];
         $scope.onclickage = function(){
            $scope.dataage = [];
@@ -356,13 +357,14 @@ app.controller('MainCtrl', function($scope) {
             }, 0);
         };
         
-        function getData(url){
-        $.ajax({url: url, async: false, success: function(result){
-          data = result['result'];
-        }
-        });
-          return data;
-        }
+  function getData(url){
+  // Make a sync call to the server and return the results
+  $.ajax({url: url, async: false, success: function(result){
+    data = result['result'];
+  }
+  });
+    return data;
+  }
 
   if ($('#ntop').val()==10) {
       chart_height = 600;
@@ -371,29 +373,29 @@ app.controller('MainCtrl', function($scope) {
   } else {
       chart_height = 400;
   }
-
-  $scope.optionsgral = {
-            chart: {
-                type: 'multiBarHorizontalChart',
-                height: chart_height,
-                // width: 350,
-                x: function(d){return d.label;},
-                y: function(d){return d.value;},
-                showControls: false,
-                showValues: true,
-                duration: 500,
-                xAxis: {
-                    showMaxMin: true
-                },
-                yAxis: {
-                    axisLabel: 'Values',
-                    tickFormat: function(d){
-                        return d3.format(',.2f')(d);
+      // Set the options for the Line Charts Gral.
+      $scope.optionsgral = {
+                chart: {
+                    type: 'multiBarHorizontalChart',
+                    height: chart_height,
+                    // width: 350,
+                    x: function(d){return d.label;},
+                    y: function(d){return d.value;},
+                    showControls: false,
+                    showValues: true,
+                    duration: 500,
+                    xAxis: {
+                        showMaxMin: true
+                    },
+                    yAxis: {
+                        axisLabel: 'Values',
+                        tickFormat: function(d){
+                            return d3.format(',.2f')(d);
+                        }
                     }
                 }
-            }
-        };
-        
+            };
+        // Make a call to the server and set the data for the Marital & living chart.
         $scope.data2 = [];
         $scope.onclickdata2 = function(){
             var urlmarliv = "";
@@ -405,7 +407,7 @@ app.controller('MainCtrl', function($scope) {
                 $scope.$apply();
             }, 0);
             };
-            
+        // Make a call to the server and set the data for the Crime & Profession chart.    
         $scope.data = [];
         $scope.onclickdata = function(){
           var urlcripro = "";
@@ -421,10 +423,10 @@ app.controller('MainCtrl', function($scope) {
 
 
 });
-
+// Second Controller for the Data by State
 app.controller('SecondCtrl', function($scope)
         {
-          // Initialize the model variables
+          // Make a call to the server and set the data for the General Information Container
         $scope.graldata = [];
         $scope.onclickgral = function(){
         setTimeout(function(){
