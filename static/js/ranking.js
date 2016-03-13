@@ -151,7 +151,7 @@ function setMap() {
             return values[i];
           })
           .attr("x", function(d,i){
-            return (0) + ((i)*240);
+            return (i * 240);
           })
           .attr("y", height - 40);
 
