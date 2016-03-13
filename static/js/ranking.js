@@ -118,7 +118,7 @@ function loadData() {
 
 queue()   // queue function loads all external data files 
     .defer(d3.json, "data/us.json")  // load geometries by state
-    .defer(d3.tsv, "data/rankresults.tsv")  // and associated data in tsv file
+    // .defer(d3.tsv, "data/rankresults.tsv")  // and associated data in tsv file
     .await(processData);
 
 }
@@ -139,13 +139,14 @@ function showChartGral(){
     $('#chartsgral').attr("hidden",   false);
     $('#chartsbystate').attr("hidden", true);
 }
-function processData(error,us,matches) {
+function processData(error,us) {
+  // function processData(error,us,matches)
   // function accepts any errors from the queue function as first argument, then
   // each data object in the order of chained defer() methods above              
-  matches.forEach(function (d) { // <-B
-      rateById[d.id] = +d.rate;
+  // matches.forEach(function (d) { // <-B
+  //     rateById[d.id] = +d.rate;
 
-  });
+  // });
 
   drawMap(us);
 
