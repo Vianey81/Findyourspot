@@ -122,7 +122,7 @@ function setMap() {
     var legendElementWidth = 230;
     var buckets = 5;
     var colors = ["#006d2c", "#31a354", "#74c476", "#bae4b3", "#edf8e9" ];
-    var values = ["Best Choices","", "Middle Choices", "", "Worse Choices"];
+    var values = ["Best Match","", "", "", "Worst Match"];
     var colorScale = d3.scale.quantile()
                       .domain([50,0])
                       .range(colors);
