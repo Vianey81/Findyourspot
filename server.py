@@ -19,7 +19,9 @@ import json
 app = Flask(__name__)
 
 # Required to use Flask sessions and the debug toolbar
-app.secret_key = "CRAYOLA"
+SECRET_KEY = os.environ.get("FLASK_SECRET_KEY", "CRAYOLA")
+
+app.secret_key = SECRET_KEY
 
 PORT = int(os.environ.get("PORT", 5000))
 
@@ -176,13 +178,16 @@ def chartsgral_json():
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
     # that we invoke the DebugToolbarExtension
-    app.debug = True
+    DEBUG = "NO_DEBUG" not in os.environ
+
+    # app.run(debug=DEBUG)
+    # app.debug = True
 
     connect_to_db(app)
 
     # Use the DebugToolbar
     # DebugToolbarExtension(app)
 
-    app.run(debug=True, host="0.0.0.0", port=PORT)
+    app.run(debug=DEBUG, host="0.0.0.0", port=PORT)
 
     # app.run()
