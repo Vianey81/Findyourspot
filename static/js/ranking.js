@@ -109,6 +109,53 @@ function setMap() {
 
             });
       svg.call(zoom);
+
+    
+    var margin = {
+            top: 5,
+            right: 0,
+            bottom: 90,
+            left: 100
+          };
+    // Color legend
+
+    var legendElementWidth = 230;
+    var buckets = 5;
+    var colors = ["#006d2c", "#31a354", "#74c476", "#bae4b3", "#edf8e9" ];
+    var values = ["Best Choices","", "Middle Choices", "", "Worse Choices"];
+    var colorScale = d3.scale.quantile()
+                      .domain([50,0])
+                      .range(colors);
+
+    var legend = svg.selectAll(".legend")
+                  .data([0].concat(colorScale.quantiles()), function(d) {
+                    return d;
+                  });
+
+    legend.enter().append("g")
+                  .attr("class", "legend");
+
+    legend.append("rect")
+          .attr("x", function(d, i) {
+            return legendElementWidth * i + (width - legendElementWidth * buckets);
+          })
+          .attr("y", 550)
+          .attr("width", legendElementWidth)
+          .attr("height", 20)
+          .style("fill", function(d, i) {
+            return colors[i];
+          });
+
+    legend.append("text")
+          .text(function(d, i) {
+            return values[i];
+          })
+          .attr("x", function(d,i){
+            return (0) + ((i)*240);
+          })
+          .attr("y", height - 40);
+
+
       loadData();  // Load the Data
 
 }
