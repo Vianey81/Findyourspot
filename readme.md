@@ -4,6 +4,8 @@ Have you ever thought about moving to another State?. Do you wish you could find
 If you answer is yes...Spot Finder is the right tool for you.
 Spot Finder will help you choose the best State for you to live in based on your preferences.
 
+* [SpotFinder] - Click here to see the deployed version.
+
 
 ### Main Page
 
@@ -69,4 +71,5 @@ and integrate systems more effectively
    [AJAX]: <https://en.wikipedia.org/wiki/Ajax_(programming)>
    [D3]: <https://d3js.org>
    [NVD3]: <http://nvd3.org>
+   [SpotFinder]: <https://spotfinder2016.herokuapp.com/#>
 
