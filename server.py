@@ -11,6 +11,7 @@ from model import State, County
 from model import StateProfession, StateLiving, CountyLiving, StateMarital
 from model import CountyMarital, StateCrime, CountyCrime
 import ranking
+import os
 from flask import jsonify
 import json
 
@@ -19,6 +20,8 @@ app = Flask(__name__)
 
 # Required to use Flask sessions and the debug toolbar
 app.secret_key = "CRAYOLA"
+
+PORT = int(os.environ.get("PORT", 5000))
 
 # Normally, if you use an undefined variable in Jinja2, it fails silently.
 # This is horrible. Fix this so that, instead, it raises an error.
@@ -32,13 +35,6 @@ def index():
     professions = db.session.query(StateProfession.title).filter_by(level='major').group_by(StateProfession.title).all()
 
     return render_template("index.html", professions=professions)
-
-
-@app.route('/prueba')
-def prueba():
-    """Testing Jasny."""
-
-    return render_template("rank.html")
 
 
 @app.route('/search_states')
@@ -187,4 +183,6 @@ if __name__ == "__main__":
     # Use the DebugToolbar
     # DebugToolbarExtension(app)
 
-    app.run()
+    app.run(debug=True, host="0.0.0.0", port=PORT)
+
+    # app.run()
